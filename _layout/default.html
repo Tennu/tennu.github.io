@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title }} - The Tennu framework for IRC Bots in JavaScript</title>
+    <meta name="viewport" content="width=device-width">
+
+    <meta name="description"
+          content="Tennu is a framework for event and promise driven programming in JavaScript">
+    <meta name="keywords" content="tennu, irc, open source, javascript, library, framework, irc bot">
+
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/screen.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400|Droid+Serif:400,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div id="header">
+      <div id="header-container">
+        <div id="header-row">
+          <header id="logo">
+            <h1><a href="/">Tennu</a></h1>
+            <em><a href="/">Event and Promise-driven IRC Bots</a></em>
+          </header>
+          <nav id="top-navigation">
+            <ul>
+              {% for link in site.navigation %}
+                {% assign current = nil %}
+                {% if page.url == link.url or page.group == link.group %}
+                  {% assign current = 'active' %}
+                {% endif %}
+                <li><a class="{{ current }}" href="{{ link.url }}">{{ link.text}}</a></li>
+              {% endfor %}
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+      <a href="http://github.com/havvy/tennu" class="fork-ribbon" target="_blank">Fork on Github</a>
+    </div>
+
+    <div id="content">
+      {{ content }}
+    </div>
+
+    <div id="footer">
+      Tennu made with <span class="heart">♥</span> by <a href="https://github.com/havvy">Havvy</a>
+      <br>
+      Page theme made with <span class="heart">♥</span> by <a href="http://robotlolita.github.io">Quildreen Motta</a>.
+    </div>
+  </body>
+</html>
