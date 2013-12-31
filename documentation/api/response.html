@@ -1,0 +1,49 @@
+---
+title: Response Values
+layout: document
+---
+
+<p>Tennu events that have a channel property (including all commands) can return
+values telling Tennu to respond to the message with a certain message.</p>
+
+<p>The return value can either be a string, an array of strings, or a response object.</p>
+
+<p>The return value can also a promise of the previous values.</p>
+
+<h2>String</h2>
+
+<p>The simplest of the return values, this string is sent to the channel in a privmsg.</p>
+
+<p>Using this, we can create a really simple echobot:</p>
+
+{% highlight javascript %}
+client.on('privmsg', function (privmsg) {
+    return privmsg.message;
+});
+{% endhighlight %}
+
+<h2>Array of Strings</h2>
+
+<p>Just as <a href="output-methods">Client.say</a> can take an array of strings, you
+can also return an array of strings, and each string will be said to the channel
+in the order sent.</p>
+
+<h2>Response Object</h2>
+
+{% highlight javascript %}
+{
+    "message": required string | [string],
+    "intent": 'say' | 'act',
+    "query": boolean,
+    "target": string
+}
+{% endhighlight %}
+
+<dl>
+    <dt>message</dt>
+    <dd>Either a string or array of strings of messages to output.</dd>
+    <dt>intent</dt>
+    <dd>Either 'say' or 'act'. By default, 'say'. Whether or not the message is an action or not.</dd>
+    <dt>target</dt>
+    <dd>Where to send the message to. Either a channel or a nickname.</dd>
+</dl>

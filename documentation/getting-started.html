@@ -1,0 +1,324 @@
+---
+layout: document
+title: Getting Started
+---
+
+<h2>Foreward</h2>
+
+<p>
+  In this tutorial, we will be creating a bot that responds to a
+  <code class="command">!givemeblt</code> command. This command will
+  give the requesting user a juicy BLT for their troubles.
+</p>
+
+<p>
+  From this, you will learn a few useful things:
+</p>
+
+<ol>
+  <li>How to install Tennu</li>
+  <li>How to create a plugin with  commands</li>
+  <li>How to start your bot</li>
+</ol>
+
+<p class="notice">
+  Note: Tennu is beta-quality software. There are rough edges, and
+  updates will often bring backwards-incompatible changes. Be prepared
+  to either stay on the version you are using, or to change your code
+  when updating. Likewise, Tennu is not feature complete.
+</p>
+
+<h2>Installation</h2>
+
+<p>
+  Tennu is a <a href="https://nodejs.org/">Node.js</a> framework.
+  You must have Node.js installed to use Tennu.
+</p>
+
+<p>
+  Create a new Node.js project. If you've never done this before,
+  here is a simple process for doing so:
+</p>
+
+<ol>
+  <li>Create a directory to store your project.</li>
+  <li>Open up the directory in your console.</li>
+  <li>Type <code class="shell">npm init</code> and answer its questions.</li>
+  <li>Type <code class="shell">npm install tennu -g</code>. You may have to prepend with <code>sudo</code>.</li>
+</ol>
+
+<p>
+  Your project should now have a <code>package.json</code> file.
+  We will be adding two more items:
+</p>
+
+<dl>
+  <dt>config.json</dt>
+  <dd>All configuration data for your bot will be located in this file.</dd>
+
+  <dt>tennu_plugins</dt>
+  <dd>Your plugins will be located in this directory.</dd>
+</dl>
+
+<p class="notice">
+  If you can't install Tennu globally, you can also install it locally, without the -g flag.
+  If you plan on distributing your bot to others, you should install it locally anyways.
+</p>
+
+<h2>Configuration</h2>
+
+<p>
+  We will start with the configuration file. Take this
+  <a href="https://json.org">JSON</a>, and save it in <code>config.json</code>.
+<p>
+
+{% highlight javascript %}
+{
+    "server": "irc.your-network.net",
+    "password": null,
+    "port": 6667,
+    "nickname": "BLTBot",
+    "username": "blt",
+    "realname": "BLTBot in tennu",
+    "channels": [],
+    "nickserv": "nickserv",
+    "auth-password": null
+    "plugins": ["blt"],
+    "command-trigger": "!",
+    "disable-help": false
+}
+{% endhighlight %}
+
+<p>
+  You will want to change these values for your bot, specifically `server` and `channels`.
+<p>
+
+<p class="notice">
+  You can have your bot identify to services (the service named by `nickserv`) by setting
+  the `auth-password` option to the password. You must first register the nickname on the
+  server. See <a href="registering-bots">here</a> for more details.
+</p>
+
+<p class="notice">
+  If you want the commmand trigger to be a different character, say
+  <code>@</code> instead of <code>!</code>, change the `command-trigger` property.
+</p>
+
+<p>
+  The plugins property already contains a plugin, <code>blt</code>. We haven't
+  written it yet, but this will be its name. Any plugins you want to load,
+  including their dependencies, must be listed in this array.
+  The only exception are the plugins built into Tennu itself:
+</p>
+
+<dl>
+  <dt><a href="/plugins/server">Server</a></dt>
+  <dd>Exposes functions that give information about the server.</dd>
+
+  <dt><a href="/plugins/action">Action</a></dt>
+  <dd>
+    Coming in Tennu 0.10.0, this plugin provides the actions your bot uses
+    to do things on the server. These commands are also available on the
+    client object.
+  </dd>
+
+  <dt><a href="/plugins/user">User</a></dt>
+  <dd>Exposes functions that give information about the server's users.</dd>
+
+  <dt><a href="/plugins/channel">Channel</a></dt>
+  <dd>Exposes functions that give information about the server's channels.</dd>
+
+  <dt><a href="/plugins/help">Help</a></dt>
+  <dd>Controls the commands !help and !commands</dd>
+</dl>
+
+<p class="note">
+  Most of these plugins currently expose no functionality.
+</p>
+
+<h2>Writing the BLT Module</h2>
+
+<p>
+  In the previous section, we named the plugin <code>BLT</code>. As such,
+  our plugin will be located at <code>tennu_plugins/blt.js</code>.
+</p>
+
+<p>
+  Here are the contents of <code>tennu_plugins/blt.js</code>.
+</p>
+
+{% highlight JavaScript %}
+var BLTPlugin = {
+    init: function (client, imports) {
+        return {
+            handlers: {
+                '!givemeblt': function (command) {
+                    client.act(command.channel, 'gives a juicy BLT to ' + command.nickname);
+                }
+            },
+
+            help: {
+                'command': [
+                    '!givemeblt',
+                    ' ',
+                    'Gives the requestor a juicy BLT.'
+                ]
+            },
+
+            commands: ['givemeblt']
+        }
+    }
+};
+
+module.exports = BLTPlugin;
+{% endhighlight %}
+
+<p>
+  We send an action to the server in the channel the command came from giving
+  the BLT to the nickname the command originated from.
+</p>
+
+<p>
+  If you have never used Node.js before, the final line may confuse you.
+  It just means that the Node module is exporting the object at
+  <code>BLTPlugin</code>. If it was not there, Tennu (or any other node module)
+  would not be able to access the plugin.
+</p>
+
+<p>
+  Given this example, every Tennu Plugin file should look something like this:
+</p>
+
+{% highlight JavaScript %}
+var TennuPluginName = {
+    init: function (client, imports) {
+        // Initialization of the plugin.
+
+        return {
+            exports: {
+                // Exported properties.
+            },
+
+            handlers: {
+                '!command': function (command) {
+                    // Handle the command
+                }
+            },
+
+            help: {
+                'command': [
+                    '!command &lt;command&gt;',
+                    ' ',
+                    'Help info about command.'
+                ]
+            },
+
+            commands: ['command']
+        }
+    }
+};
+
+module.exports = TennuModuleName;
+{% endhighlight %}
+
+<p>
+  The Tennu plugin is an object with a single property, <code>init</code>.
+  This property contains a function that takes two
+  values, <code>client</code> and <code>imports</code>. The client is
+  the reference to Tennu, and your way of accessing all of the functionality
+  the library provides outside of the hooks described here. The imports
+  object contains the exports properties of plugins that you require. This
+  plugin does not require any other plugins, so it is an empty object.
+</p>
+
+<p>
+  The <code>init</code> function returns an object, known as the plugin
+  instance, with various properties (all optional):
+</p>
+
+<dl>
+  <dt>exports</dt>
+  <dd>Values that are passed to other plugins when they require your plugin.</dd>
+
+  <dt>handlers</dt>
+  <dd>
+    This is an object where the property names are the
+    <a href="/documentation/api/message">messages</a> and command
+    types to listen to, and the functions are the handlers for that message
+    or command type.
+  </dd>
+
+  <dt>help</dt>
+  <dd>
+    This is a hook for the <a href="/plugins/help">help</a> plugin to
+    provide help for your commands and other topics.
+  </dd>
+
+  <dt>commands</dt>
+  <dd>
+    This is also a hook for the <a href="/plugins/help">help</a> plugin
+    to list the commands provided by your bot.
+  </dd>
+
+  <dt>hooks</dt>
+  <dd>
+    Mentioned here for completeness, see <a href="/documentation/hooks">hooks</a>.
+  </dd>
+</dl>
+
+<p>
+  Comparing this to our bot, our bot does not export any values, and has one
+  command handler that is documented. It does not do any special initialization.
+</p>
+
+<h2>Running Your Bot</h2>
+
+<p>
+  Tennu comes with a command line utility for starting bots.
+</p>
+
+<p>
+  From the command line, in your project directory, utter this incantation:
+</p>
+
+<p><code class="shell">tennu config.json -v</code></p>
+
+<p>
+  This command says run your tennu bot with the configuration located at
+  <code>config.json</code> with verbose output.
+</p>
+
+<p class="note">
+  If you want your bot not to log to the console, leave off the -v flag.
+</p>
+
+<p>
+  For extra utility, put this command into the scripts property of
+  your <code>package.json</code> file.
+</p>
+
+{% highlight JavaScript %}
+{
+    // ...
+    "scripts": {
+        "start": "tennu config.json -v"
+    }
+}
+{% endhighlight %}
+
+<p>
+  Now you can just type <code class="shell">npm start</code> to start your bot.
+</p>
+
+<div class="note">
+  <p>
+    If you plan on distributing your bot, you should run the following shell command:
+  </p>
+
+  <code>npm install --save tennu</code>
+
+  <p>
+    This will put a local copy of tennu into <code>node_modules/</code> and add it
+    to the dependencies object in the <code>package.json</code> file.
+  </p>
+</div>

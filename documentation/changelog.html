@@ -1,0 +1,174 @@
+---
+layout: document
+title: Changelog
+---
+
+<h2>v0.9.2</h2>
+
+<ul>
+    <li>Bugfix: Crash in MessageHandler.</li>
+</ul>
+
+<h2>v0.9.1 - Startup plugin + bugfixes (In progress)</h2>
+
+<ul>
+    <li>Startup code in Client factory moved to startup plugin.</li>
+    <li><code>Client.notice()</code> is deprecated. Use <code>Client.note()</code>. This will allow <code>.notice()</code> to be <code>/notice</code> command. No changes to the Logger are made. Logger.notice() is still the name of the logger notice method.</li>
+    <li>Bugfix: Use either .removeListener() or .off() for primary event in BiSubscriber instead of just .removeListener().</li>
+    <li>Bugfix: Fix listeners in <code>User.isIdentifiedAs()</code>.</li>
+</ul>
+
+<h3>Upgrade Notes</h3>
+
+<p>Where you are using <code>Client.notice()</code>, change it to <code>Client.note()</code>.</p>
+
+<h2>v0.9.0 - The plugin update</h2>
+
+<ul>
+    <li>Updated <a href="https://npmjs.org/package/tennu-modules"><code>tennu-modules</code></a> v2.x.x to <a href="https://npmjs.org/package/tennu-plugins"><code>tennu-plugins</code></a> v3.0.x.</li>
+    <li>Moved <code>lib/event-emitter.js</code> to its own package, <a href="https://npmjs.org/package/after-events"><code>after-events</code></a>.</li>
+    <li>
+        <p>Made changes to configuration properties.</p>
+        <ul>
+            <li><code>nick</code><sup>1</sup> -> <code>nickname</code></li>
+            <li><code>user</code><sup>1</sup> -> <code>username</code></li>
+            <li><code>modules</code> -> <code>plugins</code></li>
+            <li><code>trigger</code> -> <code>command-trigger</code></li>
+            <li><code>password</code><sup>2</sup> -> <code>auth-password</code></li>
+        </ul>
+
+        <ol class="footnotes">
+            <li>Actually, these properties will now just throw an error when used. The replacements were added in v.0.8.4.</li>
+            <li><code>password</code> still works for the server password, only the nickserv password changed.</code></li>
+        </ol>
+    </li>
+    <li>Removed receiver property from Message objects.</li>
+    <li>Readded <a href="http://www.irc.org/tech_docs/005.html"><code>isupport</code></a> support in <a href="/plugins/server">server plugin</a>.</li>
+    <li>Passed <code>isupport</code> object to Message factory. Unused by factory in this release.</li>
+    <li>Plugins and client.js are using <a href="http://sweetjs.org">sweet.js</a>, and must now be built when changed.</li>
+</ul>
+
+<h3>Upgrade Notes</h3>
+
+<p>You'll definitely want to update your configuration files and/or objects for the property changes.</p>
+<p>If you're using a <code>tennu_modules</code> directory, rename the directory to <code>tennu_plugins</code>.</p>
+<p>Anywhere in your code and documentation that you are using 'module', change it to 'plugin'.</p>
+
+<h2>v0.8.4</h2>
+
+<ul>
+    <li>Update <a href="https://npmjs.org/package/irc-socket"><code>irc-socket</code></a> to v.2.2.x.</li>
+    <li>
+        <p>Configuration additions from the update:</p>
+        <ul>
+            <li><code>nickname</code> - Alias for <code>nick</code>.</li>
+            <li><code>username</code> - Alias for <code>user</code>.</li>
+            <li><code>ipv6</code></li>
+            <li><code>localAddress</code></li>
+        </ul>
+    </li>
+    <li>(Thanks <a href="https://github.com/metalbot">metalbot</a>) Nick highlight command trigger case is now case-insensitive.</li>
+    <li>BiSubscriber and Client gain <code>.off()</code> method which take the same properties as <code>.on()</code>, but removes the listeners. There is no way to remove listeners added by <code>.once()</code> though. File an issue if you need this.</li>
+</ul>
+
+<h2>v0.8.3</h2>
+
+<ul>
+    <li><a href="/documentation/api/response">Response object</a> can now take a <span title="Either a channel or a nickname" style="text-decoration: underline;">target</span>.</li>
+    <li><a href="https://fez.github.io/">Fez</a> is now working.</li>
+</ul>
+
+<h2>v0.8.2</h2>
+
+<ul>
+    <li>Added <code>disable-help</code> to <a href="/documentation/api/configuration">configuration</a> for disabling the help plugin.</li>
+    <li><a href="/documentation/api/response">Response can now be an object.</a></li>
+    <li>Added <a href="https://fez.github.io/">fez</a> and <a href="http://sweetjs.org">sweet.js</a> to start a build process. Only tests are built in this version.</li>
+</ul>
+
+<h2>v0.8.1</h2>
+
+<ul>
+    <li>Fixed <code>client.ctcp()</code> and <code>client.act()</code>.</li>
+    <li>Renamed <code>client.initialize()</code> to <code>client.initializeModule()</code>.</li>
+    <li>Renamed <code>client.isInisInitializable</code> to <code>client.isModuleInitializable()</code>.</li>
+</ul>
+
+<h2>v0.8.0 - The promised update</h2>
+
+<ul>
+    <li>Beginning promise support by allowing <a href="/documentation/api/response">response</a> object to be a promise for its respective type.</li>
+    <li>Moved nickname tracking code to its own module.</li>
+    <li>
+        <p>Updated to <a href="https://npmjs.org/package/tennu-modules"><code>tennu-modules</code></a> v.2.0.x.</p>
+        <p>Modules are now objects with the following properties:</p>
+        <ul>
+            <li>init</li>
+            <li>requires</li>
+            <li>requiresRoles</li>
+            <li>role</li>
+            <li>name</li>
+        </ul>
+    </li>
+</ul>
+
+<h2>v0.7.2 - The whois update</h2>
+
+<ul>
+    <li>
+        <p><a href="/documentation/api/message-properties">Message extensions</a> for the following numerics:</p>
+        <dl>
+            <dt>307</dt><dd>RPL_WHOISREGNICK</dd>
+            <dt>311</dt><dd>RPL_WHOISUSER</dd>
+            <dt>312</dt><dd>RPL_WHOISSERVER</dd>
+            <dt>317</dt><dd>RPL_WHOISIDLE</dd>
+            <dt>318</dt><dd>RPL_ENDOFWHOIS</dd>
+            <dt>319</dt><dd>RPL_WHOISCHANNELS</dd>
+            <dt>330</dt><dd>RPL_WHOISLOGGEDIN</dd>
+            <dt>378</dt><dd>RPL_WHOISHOST</dd>
+            <dt>401</dt><dd>ERR_NOSUCHNICK</dd>
+        </dl>
+    </li>
+    <li>Numerics with extensions will have the <code>MessageHandler</code> emit the replyname.</li>
+    <li><a href="/plugins/user">User plugin</a> exports <code>isIdentifedAs(nickname, nickname_identified, callback).</code></li>
+    <li>Added mocha, sinon, deep-eql, and better-assert to <code>devDependencies</code>.</li>
+    <li>Added <code><a href="https://github.com/Tennu/tennu/tree/master/test">/test</a></code> directory for Mocha tests.</li>
+</ul>
+
+<h2>v0.7.1</h2>
+
+<ul>
+    <li>
+        <p>Command Line tool improvements:</p>
+        <ul>
+            <li>-d flag for logging debug. Must be paired with -v.</li>
+            <li>Errors log their stacktrace.</li>
+        </ul>
+    </li>
+    <li><code>OutputSocket#rawf(format, args...)</code></li>
+    <li><code>MessageHandler</code> and <code>CommandHandler</code> log to "error" the stack of the error.</li>
+    <li>Bugfix: <code>CommandHandler</code> listener to <code>MessageHandler</code> no longer returns.</li>
+    <li>Bugfix: Pass socket and logger to <code>MessageHandler</code> in correct order!</li>
+</ul>
+
+<h2>v0.7.0 - Logging and Command Line Interface</h2>
+
+<ul>
+    <li>
+        <p>Logging Interface:</p>
+        <ul>
+            <li>Levels (also methods): <code>debug</code>, <code>info</code>, <code>notice</code>, <code>warn</code>, <code>error</code>, <code>crit</code>, <code>alert</code>, <code>emerg</code></li>
+            <li><code>.log(level, ...log_message);</code></li>
+            <li>Logs to nothing by default, so you'll have to <a href="/documentation/api/configuration">pass in a Logger</a>.</li>
+        </ul>
+    <li>Deprecation: <code>.nick()</code> nullary version deprecated. Use <code>.nickname()</code> instead.</li>
+    <li>KICK <a href="/documentation/api/message-properties">message extension</a> added (channel, kicked, kicker)</a></li>
+    <li><code>.then()</code> changed to <code>.after()</code> in <code>./lib/event-emitter</code> to avoid `thennable assimilation` in ES6.</li>
+    <li>Command Line Tool added. (Use via <code>./node_modules/tennu/bin/cli.js config.json -v</code>)</li>
+</ul>
+
+<p class="notice">There are two critical bugs in this release. They are fixed in v.0.7.1.</p>
+
+<h2> Older versions </h2>
+
+TBD

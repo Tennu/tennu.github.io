@@ -96,7 +96,7 @@ a img {
   margin: 0 auto;
 }
 .undecorated,
-#header .fork-ribbon,
+#header .ribbon-container .fork-ribbon,
 #logo a,
 #top-navigation a {
   text-decoration: none;
@@ -117,7 +117,6 @@ body {
   color: #424242;
   line-height: 130%;
   border-top: 10px solid #555;
-  overflow-x: hidden;
 }
 #header {
   background: #f3f3f3;
@@ -149,7 +148,15 @@ body {
   *width: 64.53125000000001%;
   *margin: 0 0.9895833333333331%;
 }
-#header .fork-ribbon {
+#header .ribbon-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+#header .ribbon-container .fork-ribbon {
   position: absolute;
   top: 0;
   right: 0;
@@ -163,6 +170,7 @@ body {
   transform: rotate(45deg) translateX(110px) translateY(-35px);
   letter-spacing: 1px;
   word-spacing: 3px;
+  white-space: nowrap;
 }
 #content {
   background: #f3f3f3;
@@ -354,27 +362,21 @@ code {
   font-weight: 300;
   line-height: 150%;
   color: #999;
-  margin: 1em 0 0.5em;
   font-family: Lato, sans;
   text-shadow: 0 0 0 10px #f3f3f3;
   position: relative;
   z-index: 2;
   overflow-x: hidden;
   white-space: nowrap;
+}
+.document h1,
+.document h2 {
   margin-left: -60px;
 }
 .document h1:after,
 .document h2:after,
-.document h3:after,
-.document h4:after,
-.document h5:after,
-.document h6:after,
 .document h1:before,
-.document h2:before,
-.document h3:before,
-.document h4:before,
-.document h5:before,
-.document h6:before {
+.document h2:before {
   content: "";
   display: inline-block;
   vertical-align: middle;
@@ -383,28 +385,16 @@ code {
   background: #ddd;
 }
 .document h1:before,
-.document h2:before,
-.document h3:before,
-.document h4:before,
-.document h5:before,
-.document h6:before {
+.document h2:before {
   width: 50px;
   margin-right: 10px;
 }
 .document h1:after,
-.document h2:after,
-.document h3:after,
-.document h4:after,
-.document h5:after,
-.document h6:after {
+.document h2:after {
   margin-left: 10px;
 }
 .document h1 code,
-.document h2 code,
-.document h3 code,
-.document h4 code,
-.document h5 code,
-.document h6 code {
+.document h2 code {
   color: #999;
   font-size: 80%;
 }
@@ -457,6 +447,15 @@ code {
 }
 .document .highlight pre code {
   color: #424242;
+}
+.document dt {
+  font-weight: bold;
+}
+.document dd {
+  margin: 5px 0 1em 0;
+  padding-left: 20px;
+  color: #777;
+  border-left: 3px solid #eee;
 }
 .document ol {
   list-style: decimal;

@@ -1,0 +1,109 @@
+---
+layout: document
+title: Documentation
+---
+
+<p>The configuration object is passed to the Tennu Client factory. It defines what you can do with your bot.</p>
+
+<p>In the configuration object, <code>undefined</code> and <code>null</code> and lack of property are treated equivalently.</p>
+
+<h2>IRC Socket Configuration</h2>
+
+<dl>
+    <dt id="config-server">server</dt>
+    <dd>The server to connect to. For instance, <code>irc.mibbit.net</code>.</dd>
+
+    <dt id="config-port">port</dt>
+    <dd>The port to connect to. By default, <code>6667</code>.</dd>
+
+    <dt id="config-ipv6">ipv6</dt>
+    <dd>Sets the <code>ipv6</code> property in the net.Socket() constructor to this value. Defaults to true.</dd>
+
+    <dt id="config-localAddress">localAddress</dt>
+    <dd>Sets the <code>localAddress</code> property in the net.Socket() constructor to this value. Defaults to undefined.</dd>
+
+    <dt id="config-secure">secure</dt>
+    <dd>
+        <p>Uses a TLS socket instead of a non-TLS socket. Since most networks don't have valid SSL certifications, this setting does not require them to be. False by default.</p>
+
+        <p class="note">When this setting is true, the <a href="#dependency-NetSocket">NetSocket</a> is ignored unless the <a href="#dependency-IrcSocket">IrcSocket</a> is changed. This is a bug, and if you want to fix it, please send a pull request to <a href="https://github.com/havvy/irc-socket"><code>irc-socket</code>'s github</a>.</p>
+
+        <p class="note">When this setting is true, <code>ipv6</code> and <code>localAddress</code> are ignored. It doesn't look possible to set them on TLS sockets in Node 0.10.x.</p>
+    </dd>
+
+    <dt id="config-password">password</dt>
+    <dd>The server for the password. Most servers don't have passwords, and this can be left undefined.</dd>
+
+    <dt id="config-capab">capab</dt>
+    <dd>This sends the <a href="http://www.leeh.co.uk/draft-mitchell-irc-capabilities-02.html#ls"><code>CAP LS</code></a> command to the server. It does no other handling, and Tennu has no specific <code>CAPAB</code> handling at this time.</dd>
+
+    <dt id="config-nickname">nickname</dt>
+    <dd>
+        <p>The nickname to join with. By default, we use 'tennubot'.</p>
+
+        <p class="note">If the nickname is erronous or already taken, Tennu takes no current action, and the socket will eventually be closed by the network.</p>
+    </dd>
+
+    <dt id="config-username">username</dt>
+    <dd>The username to use. By default, we use 'tennu'</dd>
+
+    <dt id="config-realname">realname</dt>
+    <dd>Also known as the gecos, the realname is a field where you can put an arbitrary name, including spaces. By default, we set it to the current version of Tennu.</dd>
+</dl>
+
+<h2>Other Configuration Values</h2>
+
+<dl>
+    <dt id="config-channels">channels</dt>
+    <dd>
+        <p>A list of channels to join once connected.</p>
+        <p class="note">There is no checking to see if you've actually joined the channels.</p>
+    </dd>
+
+    <dt id="config-nickserv">nickserv</dt>
+    <dd>The user to send the identification message to. Defaults to 'nickserv'.</dd>
+
+    <dt id="config-auth-password">auth-password</dt>
+    <dd>The password to send in the identification message. If undefined, no identification message is sent.</dd>
+
+    <dt id="config-plugins">plugins</dt>
+    <dd>
+        <p>A list of <a href="plugins">plugins</a> to load. The order does not matter.<p>
+        <p class="note">Any plugins that these plugins depend on must also be in this list.</p>
+    </dd>
+
+    <dt id="config-command-trigger">command-trigger</dt>
+    <dd>The trigger command to look for in privmsgs to determine whether the message is a <a href="commands">command</a> or not. Defaults to '!'. May be multiple characters. If the empty string, all messages will be treated as commands. It must be a string.</dd>
+
+    <dt id="config-disable-help">disable-help</dt>
+    <dd>Disables the <a href="/plugins/help">help</a> plugin. False by default.</dd>
+</dl>
+
+<h2>Dependency Management</h2>
+
+<p>The Tennu Client does not hardcode which dependencies it uses. You can pass an object with dependencies to replace the ones Tennu uses by default. While this object is in flux (for example, IrcOutputSocket is being replaced by a default plugin), there are three dependencies that you can rely on not changing: <a href="/documentation/api/logger">Logger</a>, NetSocket, and IrcSocket.</p>
+
+<p>A common example of replacing a dependency is changing the logger. By default, the logger outputs nothing. Let's change it so that everything prints to standard out.</p>
+
+{% highlight javascript %}
+var Tennu = require('Tennu');
+var config = require('./config.json');
+
+var print = console.log.bind(console);
+
+var Logger = function () {
+    return {
+        debug: print,
+        info: print,
+        note: print,
+        notice: print,
+        warning: print,
+        crit: print,
+        alert: print,
+        emerg: print
+    }
+};
+
+var client = Tennu(config, {Logger: Logger});
+client.connect();
+{% endhighlight %}

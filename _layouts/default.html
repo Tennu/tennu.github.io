@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>{{ page.title }} - The Tennu framework for IRC Bots in JavaScript</title>
+    <title>{{ page.title }} - {{ site.title }}</title>
     <meta name="viewport" content="width=device-width">
 
     <meta name="description"
-          content="Tennu is a framework for event and promise driven programming in JavaScript">
-    <meta name="keywords" content="tennu, irc, open source, javascript, library, framework, irc bot">
+          content="{{ site.description }}">
+    <meta name="keywords" content="{{ site.keywords }}">
 
     <link rel="stylesheet" href="/css/syntax.css">
     <link rel="stylesheet" href="/css/screen.css">
@@ -18,8 +18,8 @@
       <div id="header-container">
         <div id="header-row">
           <header id="logo">
-            <h1><a href="/">Tennu</a></h1>
-            <em><a href="/">Event and Promise-driven IRC Bots</a></em>
+            <h1><a href="/">{{ site.name }}</a></h1>
+            <em><a href="/">{{ site.subheader }}</a></em>
           </header>
           <nav id="top-navigation">
             <ul>
@@ -35,7 +35,9 @@
           
         </div>
       </div>
-      <a href="http://github.com/havvy/tennu" class="fork-ribbon" target="_blank">Fork on Github</a>
+      <div class="ribbon-container">
+        <a href="http://github.com/tennu/tennu" class="fork-ribbon" target="_blank">View on Github</a>
+      </div>
     </div>
 
     <div id="content">
@@ -45,7 +47,7 @@
     <div id="footer">
       Tennu made with <span class="heart">♥</span> by <a href="https://github.com/havvy">Havvy</a>
       <br>
-      Page theme made with <span class="heart">♥</span> by <a href="http://robotlolita.github.io">Quildreen Motta</a>.
+      Site theme made with <span class="heart">♥</span> by <a href="http://robotlolita.github.io">Quildreen Motta</a>.
     </div>
   </body>
 </html>
