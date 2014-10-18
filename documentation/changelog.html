@@ -3,6 +3,23 @@ layout: document
 title: Changelog
 ---
 
+<h2>v0.10.0 - The lifecycle update</h2>
+
+This update deals with error handling and disconnection by telling each plugin when they happen.
+
+<ul>
+    <li>Bugfix: <code>Client.disconnect()</code> didn't returns the client when already disconnected.</li>
+    <li>Plugin hook: 'die' called when client dies unexpectedly.</li>
+    <li><code>Client.prototype.die(from: string, cause: object)</code> added for force killing a client.</li>
+</ul>
+
+<h2>v0.9.3</h2>
+
+<ul>
+    <li>Changed build system, replacing Fez with Gulp, since Fez's maintainer vanished.</li>
+    <li>Moved all source files into subdirectories in <code>/src</code>.</li>
+</ul>
+
 <h2>v0.9.2</h2>
 
 <ul>
