@@ -13,11 +13,19 @@ This update deals with error handling and disconnection by telling each plugin w
     <li><code>Client.prototype.die(from: string, cause: object)</code> added for force killing a client.</li>
 </ul>
 
+<h2>v0.9.6</h2>
+
+<ul>
+    <li>Fixed bug in previous version.</li>
+    <li>Fixed join on success test to use promises</li>
+</ul>
+
 <h2>v0.9.5</h2>
 
 <ul>
     <li>Fix failing tests due to non-SemVer-compliant breakages in Sinon's Fake Time capabilities.</li>
     <li>Finally replace all uses of Q.js with Bluebird.</li>
+    <li>Bug: Failed to change an instance of deferred.resolve() to resolve(), causing an internal error to be thrown.</li>
 </ul>
 
 <h2>v0.9.4</h2>
