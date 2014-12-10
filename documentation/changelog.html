@@ -7,11 +7,19 @@ title: Changelog
 
 This update deals with error handling and disconnection by telling each plugin when they happen.
 
+It'll probably be a while before this is published though. It feels sort of like implementing Erlang's OTP stuff.
+
 <ul>
     <li>Bugfix: <code>Client.disconnect()</code> didn't returns the client when already disconnected.</li>
     <li>Plugin hook: 'die' called when client dies unexpectedly.</li>
     <li><code>Client.prototype.die(from: string, cause: object)</code> added for force killing a client.</li>
 </ul>
+
+<h2>v0.9.7</h2>
+
+<ul>
+    <li>Fixed a typo in the "channel" property of the "323" message.</li>
+    <li>Updated minimum <a href="https://npmjs.org/package/irc-socket">irc-socket</a> dependency to v.2.3.0 which has some timeout handling.</li>
 
 <h2>v0.9.6</h2>
 
