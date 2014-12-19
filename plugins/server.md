@@ -42,13 +42,13 @@ None
         SILENCE: '15',
         MODES: '12',
         CHANTYPES: '#',
-        PREFIX: '(qaohv)~&amp;@%+',
+        PREFIX: '(qaohv)~&@%+',
         CHANMODES: 'beI,kfL,lj,psmntirRcOAQKVCuzNSMTG',
         NETWORK: 'Mibbit',
         CASEMAPPING: 'ascii',
         EXTBAN: '~,cqnr',
         ELIST: 'MNUCT',
-        STATUSMSG: '~&amp;@%+',
+        STATUSMSG: '~&@%+',
         EXCEPTS: true,
         INVEX: true
       }
