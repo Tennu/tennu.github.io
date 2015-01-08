@@ -117,9 +117,9 @@ title: Getting Started
 
   <dt><a href="/plugins/action">Action</a></dt>
   <dd>
-    Coming in Tennu 0.10.0, this plugin provides the actions your bot uses
-    to do things on the server. These commands are also available on the
-    client object.
+    Coming eventually, this plugin will provide the actions your bot uses
+    to do things on the server. These commands are available on the
+    client object, and will continue to be.
   </dd>
 
   <dt><a href="/plugins/user">User</a></dt>
@@ -243,9 +243,14 @@ module.exports = TennuModuleName;
   <dt>handlers</dt>
   <dd>
     This is an object where the property names are the
-    <a href="/documentation/api/message">messages</a> and command
+    <a href="/documentation/api/message-properties">message</a> and
+    <a href="/documentation/api/command-properties">command</a>
     types to listen to, and the functions are the handlers for that message
     or command type.
+
+    To distinguish between message and commmand types, commands are prefixed
+    with a `!`. This prefix is separate from the bot's command prefix set
+    in the configuration object.
   </dd>
 
   <dt>help</dt>
