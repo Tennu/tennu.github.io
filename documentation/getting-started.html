@@ -44,7 +44,7 @@ title: Getting Started
   <li>Create a directory to store your project.</li>
   <li>Open up the directory in your console.</li>
   <li>Type <code class="shell">npm init</code> and answer its questions.</li>
-  <li>Type <code class="shell">npm install tennu -g</code>. You may have to prepend with <code>sudo</code>.</li>
+  <li>Type <code class="shell">npm install tennu --save</code>.</li>
 </ol>
 
 <p>
@@ -57,13 +57,8 @@ title: Getting Started
   <dd>All configuration data for your bot will be located in this file.</dd>
 
   <dt>tennu_plugins</dt>
-  <dd>Your plugins will be located in this directory.</dd>
+  <dd>A directory that will contain all of your custom plugins.</dd>
 </dl>
-
-<p class="notice">
-  If you can't install Tennu globally, you can also install it locally, without the -g flag.
-  If you plan on distributing your bot to others, you should install it locally anyways.
-</p>
 
 <h2>Configuration</h2>
 
@@ -286,7 +281,7 @@ module.exports = TennuModuleName;
   From the command line, in your project directory, utter this incantation:
 </p>
 
-<p><code class="shell">tennu config.json -v</code></p>
+<p><code class="shell">./node_modules/.bin/tennu config.json -v</code></p>
 
 <p>
   This command says run your tennu bot with the configuration located at
@@ -314,16 +309,3 @@ module.exports = TennuModuleName;
 <p>
   Now you can just type <code class="shell">npm start</code> to start your bot.
 </p>
-
-<div class="note">
-  <p>
-    If you plan on distributing your bot, you should run the following shell command:
-  </p>
-
-  <code>npm install --save tennu</code>
-
-  <p>
-    This will put a local copy of tennu into <code>node_modules/</code> and add it
-    to the dependencies object in the <code>package.json</code> file.
-  </p>
-</div>
