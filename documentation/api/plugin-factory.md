@@ -7,6 +7,8 @@ The plugin factory structure is what `tennu-plugins`, the plugin system for `ten
 
 The only required property to the Plugin factory object is the `init` method.
 
+## Fields
+
 | Property | Description |
 | -------- | ----------- |
 | `init`  | <small>(client: [Client](client), imports: \[Object<PluginName, PluginExportsObject>)]) -> [Plugin](plugin)</small> <br><br> The actual function that constructs an actual [Plugin](plugin). It takes as parameters the client the plugin will be installed into and a dictionary to the plugin exports of the plugins that the plugin depends on. |
