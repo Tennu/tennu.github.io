@@ -15,6 +15,8 @@ The only required property to the Plugin factory object is the `init` method.
 | `requires` | <small>\[String] \| undefined</small> <br><br> The list of plugins that this plugin relies on by name. |
 | `requiresRoles` | <small>\[String] \| undefined</small> <br><br> The list of roles that this plugin relies on by name. |
 
+## Template
+
 For your convenience, here is a template for making plugins:
 
 {% highlight javascript %}
