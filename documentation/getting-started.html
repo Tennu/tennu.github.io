@@ -75,7 +75,7 @@ title: Getting Started
     "nickname": "BLTBot",
     "username": "blt",
     "realname": "BLTBot in tennu",
-    "channels": [],
+    "channels": ["#chan"],
     "nickserv": "nickserv",
     "auth-password": null,
     "plugins": ["blt"],
@@ -181,7 +181,7 @@ module.exports = BLTPlugin;
 </p>
 
 <p>
-  Given this example, every Tennu Plugin file should look something like this:
+  Given this example, every Tennu Plugin file should look minimally like this:
 </p>
 
 {% highlight JavaScript %}
@@ -217,18 +217,17 @@ module.exports = TennuModuleName;
 {% endhighlight %}
 
 <p>
-  The Tennu plugin is an object with a single property, <code>init</code>.
+  The Tennu <a href="api/plugin-factory">Plugin Factory</a> is an object with a single property, <code>init</code>.
   This property contains a function that takes two
   values, <code>client</code> and <code>imports</code>. The client is
   the reference to Tennu, and your way of accessing all of the functionality
   the library provides outside of the hooks described here. The imports
-  object contains the exports properties of plugins that you require. This
-  plugin does not require any other plugins, so it is an empty object.
+  object contains the exports properties of plugins that you require.
 </p>
 
 <p>
-  The <code>init</code> function returns an object, known as the plugin
-  instance, with various properties (all optional):
+  The <code>init</code> function returns an object, known as the <a href="api/plugin">plugin
+  instance</a>, with various properties, all optional:
 </p>
 
 <dl>
