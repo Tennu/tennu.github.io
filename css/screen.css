@@ -571,9 +571,12 @@ th {
 
 td {
   vertical-align: top;
-  border-left: 1px solid #999;
 }
 
-td:first {
-  border-left: none;
+tbody tr {
+  border-bottom: 1px solid #999;
+}
+
+tbody tr:last {
+  border-bottom: 0px solid #000;
 }
