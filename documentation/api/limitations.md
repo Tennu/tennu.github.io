@@ -13,4 +13,4 @@ exist for them.
   If your plugin doesn't do any async loading, this isn't a problem.
 ** To fix this, `tennu-plugins` would have to return a promise, thus necessitating v.4.x.y of it.
 * Plugins cannot be removed once started.
-* Plugins cannot be how-swapped.
+* Plugins cannot be hot-swapped.
