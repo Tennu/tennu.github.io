@@ -51,7 +51,7 @@ give you the help message for the command.
 
 Determines whether the user is an admin.
 
-### requireAdmin(fn: Function): Function
+### requiresAdmin(fn: Function): Function
 
 Wraps a function making it require admin priviledges to use.
 
