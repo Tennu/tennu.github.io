@@ -3,12 +3,16 @@ title: Response Values
 layout: document
 ---
 
-<p>Tennu events that have a channel property (including all commands) can return
-values telling Tennu to respond to the message with a certain message.</p>
+<p>Tennu [Message](message-properties) events that have a `"channel"` property (including all [commands](command-properties)) can return
+values telling Tennu to respond to the message with a certain message. This return value is called the `Response`.</p>
 
-<p>The return value can either be a string, an array of strings, or a response object.</p>
+<p>The Response has a type of <small>undefined | string | [string] | {intent, message, query, target} | Promise&lt;Response&gt;</small>.</p>
 
 <p>The return value can also a promise of the previous values.</p>
+
+<h2>undefined</h2>
+
+<p>You can totally return nothing at the end of a handler. Tennu will not respond in that case.</p>
 
 <h2>String</h2>
 
@@ -30,6 +34,58 @@ in the order sent.</p>
 
 <h2>Response Object</h2>
 
+<table>
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>message</td>
+            <td>
+                <small>string | [string]</small>
+                <br><br>
+                <p>The message or list of messages to send to the target.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>intent</td>
+            <td>
+                <small>"say" | "act" <!-- | "ctcp" | "notice" | "none" --> | undefined</small>
+                <br><br>
+                <dl class="code-keys">
+                    <dt>"say"</dt>
+                    <dd>A normal <code>privmsg</code> response.</dd>
+                    <dt>"act"</dt>
+                    <dd>A <code>privmsg</code> wrapped around with the CTCP Action characters. Equivalent to <code>/me</code> in user clients.</dd>
+                    <!--
+                    <dt>"ctcp"</dt>
+                    <dd>A <code>privmsg</code> wrapped around with CTCP characters.</dd>
+                    <dt>"notice"</dt>
+                    <dd>A <code>notice</code> to the target.</dd>
+                    <dt>"none"</dt>
+                    <dd>Completely disregard this object, and send nothing.</dd>
+                    -->
+                    <dt>undefined</dt>
+                    <dd>Defaults to "say"</dd>
+                </dl>
+            </td>
+        </tr>
+        <tr>
+            <td>target</td>
+            <td>
+                <small>NickName | ChannelName</small>
+                <br><br>
+                <p>The nickname or channel to send the message to.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>query</td>
+            <td>
+                <small>Boolean</small>
+                <br><br>
+                <p>
+
 {% highlight javascript %}
 {
     "message": required string | [string],
@@ -47,3 +103,5 @@ in the order sent.</p>
     <dt>target</dt>
     <dd>Where to send the message to. Either a channel or a nickname.</dd>
 </dl>
+
+<h2>Promise

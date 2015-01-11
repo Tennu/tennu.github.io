@@ -7,7 +7,7 @@ title: Documentation
 
 | Struct | Description |
 | ------ | ----------- |
-| [Tennu](tennu) | God object of an IRC connection. |
+| [Client](client) | God object of an IRC connection. |
 | [Configuration](configuration) | The base configuration structure passed to Tennu to create a Tennu object |
 | [Configuration Extensions](configuration-extensions) | A comprehensive list of extra properties other plugins add to the configuration object. |
 | [Message](message-properties) | The structure passed for each IRC message event. |

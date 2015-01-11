@@ -5,9 +5,11 @@ layout: document
 
 The plugin factory structure is what `tennu-plugins`, the plugin system for `tennu`, takes to install a plugin into a bot.
 
-The only required property to the Plugin factory object is the `init` method.
+Do not be scared that this is called a factory. It's just an object that holds the real [plugin](plugin) constructor and static metadata.
 
-## Fields
+## Properties
+
+The only required property to the Plugin factory object is the `init` method.
 
 | Property | Description |
 | -------- | ----------- |
