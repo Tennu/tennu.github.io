@@ -574,9 +574,10 @@ td {
 }
 
 tbody tr {
-  border-bottom: 1px solid #999;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
 }
 
-tbody tr:last {
-  border-bottom: 0px solid #000;
+tbody tr:last-child {
+  border-bottom-width: 0px
 }
