@@ -559,3 +559,21 @@ code {
 .document .description-summary:after {
   clear: both;
 }
+
+/* Added outside of Stylus! */
+
+th {
+  color: #999;
+  font-size: larger;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+td {
+  vertical-align: top;
+  border-left: 1px solid #999;
+}
+
+td:first {
+  border-left: none;
+}
