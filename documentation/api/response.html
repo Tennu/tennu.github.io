@@ -43,9 +43,9 @@ in the order sent.</p>
         <tr>
             <td>message</td>
             <td>
-                <small>string | [string]</small>
+                <small>string | [string] | [CtcpType, CtcpBody]</small>
                 <br><br>
-                <p>The message or list of messages to send to the target.</p>
+                <p>The message or list of messages to send to the target. When the intent is "ctcp", the third type must be used.</p>
             </td>
         </tr>
         <tr>
@@ -58,14 +58,12 @@ in the order sent.</p>
                     <dd>A normal <code>privmsg</code> response.</dd>
                     <dt>"act"</dt>
                     <dd>A <code>privmsg</code> wrapped around with the CTCP Action characters. Equivalent to <code>/me</code> in user clients.</dd>
-                    <!--
                     <dt>"ctcp"</dt>
-                    <dd>A <code>privmsg</code> wrapped around with CTCP characters.</dd>
+                    <dd>A <code>privmsg</code> wrapped around with CTCP characters. The message property must be <code>[CtcpType, CtcpBody]</code>.</dd>
                     <dt>"notice"</dt>
                     <dd>A <code>notice</code> to the target.</dd>
                     <dt>"none"</dt>
                     <dd>Completely disregard this object, and send nothing.</dd>
-                    -->
                     <dt>undefined</dt>
                     <dd>Defaults to "say"</dd>
                 </dl>
