@@ -82,24 +82,12 @@ in the order sent.</p>
             <td>
                 <small>Boolean</small>
                 <br><br>
-                <p>
+                <p>Whether to disregard the target, and send the message to the message's sender.</p>
+            </td>
+        </tr>
+    </thead>
+</table>
 
-{% highlight javascript %}
-{
-    "message": required string | [string],
-    "intent": 'say' | 'act',
-    "query": boolean,
-    "target": string
-}
-{% endhighlight %}
+<h2>Promise</h2>
 
-<dl>
-    <dt>message</dt>
-    <dd>Either a string or array of strings of messages to output.</dd>
-    <dt>intent</dt>
-    <dd>Either 'say' or 'act'. By default, 'say'. Whether or not the message is an action or not.</dd>
-    <dt>target</dt>
-    <dd>Where to send the message to. Either a channel or a nickname.</dd>
-</dl>
-
-<h2>Promise
+<p>You can return a Promise of any of the previous values, and the system will process your response when the promise resolves.</p>
