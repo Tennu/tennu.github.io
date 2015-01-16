@@ -15,11 +15,18 @@ It'll probably be a while before this is published though. It feels sort of like
     <li><code>Client.prototype.die(from: string, cause: object)</code> added for force killing a client.</li>
 </ul>-->
 
+<h2>v2.0.1</h2>
+
+<ul>
+    <li>Bugfix: Do not throw error calling Logger.note instead of Logger.notice in Client.quit</li>
+    <li>Bugfix: Readded removed space in string from incorrect refactoring in untested method Client.userhost.</li>
+</ul>
+
 <h2>v2.0.0</h2>
 
 <ul>
     <li>Add message extensions for MODE. They're not 'correct', based on hard-coding of Unrealircd behavior, but they're better than nothing. Thanks Dan Ugore.</li>
-    <li>Replace the deprecated <code>Client.notice()</code> with one that sends a notice on IRC. This is the cause for the major version bump.</li>
+    <li>Breaking: Replace the deprecated <code>Client.notice()</code> with one that sends a notice on IRC. This is the cause for the major version bump.</li>
     <li>Added <code>Client.who</code> to the OutputSocket. Doesn't return anything.</li>
     <li>Added support for showing your command handler in helpfiles. Use "<code>{{!}}</code>" in your help files.</li>
     <li>Added <a href="api/response">Response</a> intents of <code>"ctcp"</code>, <code>"notice"</code>, and <code>"none"</code>.</li>
