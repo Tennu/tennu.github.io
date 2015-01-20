@@ -15,6 +15,60 @@ It'll probably be a while before this is published though. It feels sort of like
     <li><code>Client.prototype.die(from: string, cause: object)</code> added for force killing a client.</li>
 </ul>-->
 
+<h2>v2.1.0 - The Action Plugin Update</h2>
+
+<ul>
+    <li>Internal: Add lambda-match to plugins macros.</li>
+    <li>Enhancement: "help-helpfile" config option for replacing !help nullary-arg helpfile</li>
+    <li>Refactor: Single quoted strings to double quoted in various files.</li>
+    <li>Enhancement: Rewrite Client.join to return a more useful promise.</li>
+    <li>
+        <p>Enhancement: Message extensions for the following message types.</p>
+        <ul>
+            <li>ERR_UNAVAILRESOURCE</li>
+            <li>ERR_NEEDMOREPARAMS</li>
+            <li>ERR_CHANNELISFULL</li>
+            <li>ERR_INVITEONLYCHAN</li>
+            <li>ERR_BANNEDFROMCHAN</li>
+            <li>ERR_BADCHANNELKEY</li>
+            <li>ERR_NEEDREGGEDNICK</li>
+            <li>ERR_SECUREONLYCHAN</li>
+            <li>ERR_OPERONLY</li>
+        </ul>
+    </li>
+    <li>Enhancement: Add Client.kick(channel, nickname)</li>
+    <li>Bugfix: Client.log should pass level to logger, not to client.</li>
+    <li>Enhancement: Action.raw should log source and arguments separately.</li>
+    <li>Bugfix: Client.notice(target, [message]) was not implemented.</li>
+    <li>Refactor: Move OutputSocket functionality to Action plugin.</li>
+    <li>Bugfix: Make Client.getPlugin &amp; related return their return value, and not the Client.</li>
+    <li>Bugfix: BiSubscriber.off("!x") did not actually work.</li>
+    <li>Enhancement: BiSubscriber methods are now case-insensitive.</li>
+</ul>
+
+<h3>Upgrade Notes</h3>
+
+<p>The only backwards incompatible change is the removal of the ability to pass your own OutputSocket to Tennu (not to be confused with the NetSocket or IrcSocket). I haven't seen anybody actually use that behavior though. It was replaced with the <a href="/plugins/action">Action plugin</a>.
+
+<p>Thanks to TsundereVanila for suggesting the "help-helpfile" config option.</p>
+
+<p>Thanks to Dan Ugore for pointing out quite a few bugs. Part of the reason I'm publishing so quickly.</p>
+
+
+<h2>v2.0.3</h2>
+
+<ul>
+    <li>Bugfix: Add 'chunk' to deps.</li>
+    <li>Bugfix: Command Handler needs same responsing handling as Message Handler.</li>
+    <li>Bugfix: 'Message Handler' -> 'MessageHandler' in logging.</li>
+</ul>
+
+<h2>v2.0.2</h2>
+
+<ul>
+    <li>Unpublished.</li>
+</ul>
+
 <h2>v2.0.1</h2>
 
 <ul>
@@ -35,13 +89,17 @@ It'll probably be a while before this is published though. It feels sort of like
     <li>Internal: Started using natefaubion's <a href="//npmjs.org/package/lambda-chop">lambda-chop</a> macros.</li>
 </ul>
 
+<h3>Upgrade Notes</h3>
+
+<p>The backwards incompatible change was that <code>Client.notice()</code> was changed from delegating to <code>Logger.notice</code> to delegating to <code>OutputSocket.notice</code>. To use <code>Logger.notice</code>, use <code>Client.note</code> instead.</p>
+
 <h2>v1.0.1</h2>
 
 <ul>
     <li>Peg the default realname value to the version in `package.json`.</li>
 </ul>
 
-<h2>v1.0.0</h2>
+<h2>v1.0.0 - The SemVer update</h2>
 
 Just a version bump to start using SemVer for real. Tennu still isn't feature complete, but it's usable.
 
