@@ -1,0 +1,74 @@
+---
+layout: document
+title: Documentation
+---
+
+## Using a Public Tennu Plugin
+
+Some Tennu plugins are hosted on `npm` for everybody to use.
+
+Using them is really easy. There are four simple steps to using them.
+
+For this example, we'll be using `tennu-admin` and `tennu-control` to
+allow you to use commands like `!join` and `!part` to control your
+bot from IRC while it is running.
+
+### 1) Find the Plugin
+
+You can search [npmjs.org](//npmjs.org) for plugins, or look at the
+[tennu-plugin](//www.npmjs.com/browse/keyword/tennu-plugin) tag for
+various plugins.
+
+You can also see the [list](/plugins/index) of plugins documented on
+this site.
+
+Their package name will always start with `"tennu-"`.
+
+For our example, you can find their respective packages at
+[tennu-admin](//npmjs.org/package/tennu-admin) &
+[tennu-control](//npmjs.org/package/tennu-control).
+
+### 2) Install the Plugin
+
+In your bot's project directory, use `npm install %package-name%`.
+
+This will place the package in `./node_modules/%package-name%`.
+
+For our example, we need to install both of them.
+
+<code class="shell">npm install tennu-admin
+npm install tennu-control</code>
+
+### 3) Add the plugins to your configuration.
+
+In your configuration file, append the names of the plugins
+to the `"plugins"` array.
+
+The name of the plugin is the package name without the `"tennu-"` prefix.
+
+For our example, we have this line in your `config.json`:
+
+{% highlight javascript %}
+"plugins": ["admin", "control"]
+{% endhighlight %}
+
+### 4) Add any configuration requested by the plugin.
+
+Not all plugins need configuration, but for those that do, add it.
+
+For our example, `tennu-control` takes no configuration, but `tennu-admin` does.
+
+Specifically, we need to add an "admins" property to our configuration. A basic
+example for this property is as follows.
+
+{% highlight javascipt %}
+"admins": [{"identifiedas": "your-nickname"}]
+{% endhighlight %}
+
+If you get the configuration wrong, you will not be able to use any of the commands
+provided by `tennu-control`, since they'll respond with "Permission denied.".
+
+## Testing
+
+After installing your plugin, you should start your bot and test to make sure
+you have the commands and that the configuration is correct.
