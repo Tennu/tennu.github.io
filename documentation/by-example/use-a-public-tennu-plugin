@@ -48,7 +48,7 @@ The name of the plugin is the package name without the `"tennu-"` prefix.
 
 For our example, we have this line in your `config.json`:
 
-{% highlight javascript %}
+{% highlight JavaScript %}
 "plugins": ["admin", "control"]
 {% endhighlight %}
 
@@ -61,7 +61,7 @@ For our example, `tennu-control` takes no configuration, but `tennu-admin` does.
 Specifically, we need to add an "admins" property to our configuration. A basic
 example for this property is as follows.
 
-{% highlight javascipt %}
+{% highlight JavaScript %}
 "admins": [{"identifiedas": "your-nickname"}]
 {% endhighlight %}
 
