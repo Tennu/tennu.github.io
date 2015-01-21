@@ -1,74 +1,66 @@
 ---
-layout: document
+layout: page
 title: Documentation
 ---
 
-## Using a Public Tennu Plugin
+<h2>Using a Public Tennu Plugin</h2>
 
-Some Tennu plugins are hosted on `npm` for everybody to use.
+<p>Some Tennu plugins are hosted on `npm` for everybody to use.</p>
 
-Using them is really easy. There are four simple steps to using them.
+<p>Using them is really easy. There are four simple steps to using them.</p>
 
-For this example, we'll be using `tennu-admin` and `tennu-control` to
-allow you to use commands like `!join` and `!part` to control your
-bot from IRC while it is running.
+<p>For this example, we'll be using `tennu-admin` and `tennu-control` to allow you to use commands like `!join` and `!part` to control your bot from IRC while it is running.</p>
 
-### 1) Find the Plugin
+<h3>1) Find the Plugin</h3>
 
-You can search [npmjs.org](//npmjs.org) for plugins, or look at the
-[tennu-plugin](//www.npmjs.com/browse/keyword/tennu-plugin) tag for
-various plugins.
+<p>You can search [npmjs.org](//npmjs.org) for plugins, or look at the <a href="//www.npmjs.com/browse/keyword/tennu-plugin">tennu-plugin</a> tag for various plugins.</p>
 
-You can also see the [list](/plugins/index) of plugins documented on
-this site.
+<p>You can also see the <a href="/plugins/index">list</a> of plugins documented on this site.</p>
 
-Their package name will always start with `"tennu-"`.
+<p>Their package name will always start with `"tennu-"`.</p>
 
-For our example, you can find their respective packages at
-[tennu-admin](//npmjs.org/package/tennu-admin) &
-[tennu-control](//npmjs.org/package/tennu-control).
+<p>For our example, you can find their respective packages at
+<a href="//npmjs.org/package/tennu-admin">tennu-admin</a> &amp;
+<a href="//npmjs.org/package/tennu-control">tennu-control</a>.</p>
 
-### 2) Install the Plugin
+<h3>2) Install the Plugin</h3>
 
-In your bot's project directory, use `npm install %package-name%`.
+<p>In your bot's project directory, use `npm install %package-name%`.</p>
 
-This will place the package in `./node_modules/%package-name%`.
+<p>This will place the package in `./node_modules/%package-name%`.</p>
 
-For our example, we need to install both of them.
+<p>For our example, we need to install both of them.
 
 <code class="shell">npm install tennu-admin
 npm install tennu-control</code>
 
-### 3) Add the plugins to your configuration.
+<h3>3) Add the plugins to your configuration.</h3>
 
-In your configuration file, append the names of the plugins
-to the `"plugins"` array.
+<p>In your configuration file, append the names of the plugins
+to the `"plugins"` array.</p>
 
-The name of the plugin is the package name without the `"tennu-"` prefix.
+<p>The name of the plugin is the package name without the `"tennu-"` prefix.</p>
 
-For our example, we have this line in your `config.json`:
+<p>For our example, we have this line in your `config.json`:</p>
 
 {% highlight JavaScript %}
 "plugins": ["admin", "control"]
 {% endhighlight %}
 
-### 4) Add any configuration requested by the plugin.
+<h3>4) Add any configuration requested by the plugin.</h3>
 
-Not all plugins need configuration, but for those that do, add it.
+<p>Not all plugins need configuration, but for those that do, add it.</p>
 
-For our example, `tennu-control` takes no configuration, but `tennu-admin` does.
+<p>For our example, `tennu-control` takes no configuration, but `tennu-admin` does.</p>
 
-Specifically, we need to add an "admins" property to our configuration. A basic
-example for this property is as follows.
+<p>Specifically, we need to add an "admins" property to our configuration. A basic example for this property is as follows.</p>
 
 {% highlight JavaScript %}
 "admins": [{"identifiedas": "your-nickname"}]
 {% endhighlight %}
 
-If you get the configuration wrong, you will not be able to use any of the commands
-provided by `tennu-control`, since they'll respond with "Permission denied.".
+<p>If you get the configuration wrong, you will not be able to use any of the commands provided by `tennu-control`, since they'll respond with "Permission denied.".</p>
 
-## Testing
+<h2>Testing</h2>
 
-After installing your plugin, you should start your bot and test to make sure
-you have the commands and that the configuration is correct.
+<p>After installing your plugin, you should start your bot and test to make sure you have the commands and that the configuration is correct.</p>
