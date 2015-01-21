@@ -189,6 +189,10 @@ Just a version bump to start using SemVer for real. Tennu still isn't feature co
 <p>If you're using a <code>tennu_modules</code> directory, rename the directory to <code>tennu_plugins</code>.</p>
 <p>Anywhere in your code and documentation that you are using 'module', change it to 'plugin'.</p>
 
+<h3>Historical Notes</h3>
+
+<p>The change from calling them modules to plugins is because it was getting confusing to refer to a Node module and a Tennu module, and they really needed to be called something different. Looking at Tennu today, they should really be called components, but it's not worth breaking the ecosystem to rename them <i>again</i>.
+
 <h2>v0.8.4</h2>
 
 <ul>
@@ -218,7 +222,7 @@ Just a version bump to start using SemVer for real. Tennu still isn't feature co
 <ul>
     <li>Added <code>disable-help</code> to <a href="/documentation/api/configuration">configuration</a> for disabling the help plugin.</li>
     <li><a href="/documentation/api/response">Response can now be an object.</a></li>
-    <li>Added <a href="https://fez.github.io/">fez</a> and <a href="http://sweetjs.org">sweet.js</a> to start a build process. Only tests are built in this version.</li>
+    <li>Added <a href="https://fez.github.io/">fez</a> and <a href="//sweetjs.org">sweet.js</a> to start a build process. Only tests are built in this version.</li>
 </ul>
 
 <h2>v0.8.1</h2>
@@ -235,7 +239,7 @@ Just a version bump to start using SemVer for real. Tennu still isn't feature co
     <li>Beginning promise support by allowing <a href="/documentation/api/response">response</a> object to be a promise for its respective type.</li>
     <li>Moved nickname tracking code to its own module.</li>
     <li>
-        <p>Updated to <a href="https://npmjs.org/package/tennu-modules"><code>tennu-modules</code></a> v.2.0.x.</p>
+        <p>Updated to <a href="//npmjs.org/package/tennu-plugins"><code>tennu-modules</code></a> v.2.0.x.</p>
         <p>Modules are now objects with the following properties:</p>
         <ul>
             <li>init</li>
@@ -304,6 +308,138 @@ Just a version bump to start using SemVer for real. Tennu still isn't feature co
 
 <p class="notice">There are two critical bugs in this release. They are fixed in v.0.7.1.</p>
 
-<h2> Older versions </h2>
+<h2>v.0.6.1</h2>
 
-TBD
+<ul>
+    <li>Bugfix: Commands won't echo the raw message back to the originating channel.</li>
+    <li>Bugfix: Unfreeze Messages parsed by MessageParser.</li>
+    <li>Commands return values are echoed to the originating channel (if they are strings).</li>
+</ul>
+
+<h2>v0.6.0 - The irc-message update.</h2>
+
+<ul>
+    <li>BACKWARDS INCOMPATIBLE! Changed property names for Message and Command to align with IRC specification and the irc-message module.</li>
+    <li>BACKWARDS INCOMPATIBLE! Messages with command type of "nick" have the "newNick" property changed to "new"</li>
+    <li>BACKWARDS INCOMPATIBLE! Removed the extension for the 353 numeric. It wasn't actually doing anything useful. It'll be readded in the future, but actually do some useful parsing. Use .params[0] to get it..</li>
+    <li>Help Module reimplemented. See "help.md" for more information.</li>
+    <li>"Respond" functionality. The return value for listeners that have a channel is said to the channel. No more doing tennu.say(message.channel, what_you_want_to_say). Just do `return what_you_want_to_say;`! In the future, we'll allow promises too.</li>
+    <li>Add .out and .events to Client as aliases to the OutputSocket and BiSubscriber.</li>
+    <li>Messages with the command type of "nick" have the property "old" added, which is an alias for the "nickname" property.</li>
+    <li>Commands have a [[prototype]] of the Message that they are parsed from.</li>
+    <li>Message have a tags property. (See: <a href="//ircv3.org/specification/message-tags-3.2">the spec</a> and <a href="//github.com/expr/irc-message">expr/irc-message</a>)</li>
+    <li>Removed all default logging.</li>
+    <li>Use <a href="https://github.com/expr/irc-message">irc-message</a> as the base Message parser.</li>
+    <li>Replaced mout with lodash.</li>
+    <li>Removed Grunt.js</li>
+    <li>Bugfix: Multiple spaces between words will not mess up commands and message parsing. Thanks expr for reporting.</li>
+    <li>Bugfix: Arbitrary events won't fire when passed incomplete messages from server (fixed in <a href="//npmjs.org/package/irc-socket">irc-socket</a>)</li>
+    <li>Bug: On command, the client will echo the raw message to the channel.</li>
+</ul>
+
+<h2>v0.5.3</h2>
+
+<ul>
+    <li>Hotfix: this._name() doesn't exist in CommandParser</li>
+</ul>
+
+<h2>v0.5.2</h2>
+
+<ul>
+    <li>Require 1.0.1 of simple-irc-socket for logging.</li>
+</ul>
+
+<h3>Historical Note</h3>
+
+<p>The package <a href="//npmjs.org/package/irc-socket">irc-socket</a> was originally called "simple-irc-socket". Since calling things "simple" in their name is a bad idea, it was quickly dropped.</p>
+
+<h2>v0.5.1</h2>
+
+<ul>
+    <li>Fixed OutputSocket.ctcp and OutputSocket.act</li>
+</ul>
+
+<h2>v0.5.0 - The Tennu Update</h2>
+
+<ul>
+    <li>Moved <a href="//npmjs.org/package/tennu-plugins">module system</a> to its own project.</li>
+    <li>Module system completely revamped.</li>
+    <li>Module loading via name and tennu_modules directory-tree climb.</li>
+    <li>Modules no longer have internal 'name' property.</li>
+    <li>Moved <a href="//npmjs.org/package/irc-socket">IRC socket</a> to its own project.</li>
+    <li>Got the project building again.</li>
+    <li>Renamed from NRC (Node Relay Client) to Tennu</li>
+</ul>
+
+<h3>Historical Notes</h3>
+
+<p>This project used to be called Node Relay Client. This was because Havvy was uncreative with names. During the v.0.5.0 update, the project was renamed such that it was easier to call the project by something unique. Good thing too, since Node.js has forks nowadays.</p>
+
+<h2>v0.4.4</h2>
+
+<ul>
+    <li>Made dependency injection argument of Client optional.</li>
+    <li>Started the ChunkedMessageParser. Not working.</li>
+</ul>
+
+<h2>v0.4.3</h2>
+
+<ul>
+    <li>Nrc class renamed to Client.</li>
+    <li>`whois` method added to IrcOutputSocket/Client</li>
+    <li>Moved startup stuff from IrcMessageHandler to Client.</li>
+    <li>Internal: Removed config parameter from IrcMessageHandler constructor. :)</li>
+    <li>Testing of 'say', 'part', and 'quit' of the IrcOutputSocket.</li>
+</ul>
+
+<h2>v0.4.2 (Unreleased)</h2>
+
+<ul>
+    <li>Renamed classes.</li>
+    <li>Added an IrcOutputSocket class. NRC absorbs it of course.</li>
+    <li>Added everything to the index.</li>
+    <li>Got Dependency Injection for all non-structure objects.</li>
+    <li>Added `userhost` method to IrcOutputSocket/NRC.</li>
+</ul>
+
+<h2>v0.4.1</h2>
+
+<ul>
+    <li>Added a new test for Message Handlers.</li>
+</ul>
+
+<h3>Historical Notes</h3>
+
+<p>Oh hah...pushing out a new release just because there are more tests.</p>
+
+<h2>v0.4.0 - The Module update</h2>
+
+<ul>
+    <li>Event listeners are no longer bound to 'nrc'.</li>
+    <li>Message and Command objects use 'args' instead of 'params/parameters'. This follows the same naming convention that node-irc uses.</li>
+    <li>Default NRC Modules are refactored so that they return a function that returns a module.</li>
+    <li>ModuleSubscriber.requires() interface contract changed so that it takes a one-arg constructor (that arg being the NRC object for the server the module will be on) that returns a module.</li>
+    <li>Module contract gains additional optional field for dependencies: + dependencies(undefined U ModuleExports): List[String] U undefined</li>
+    <li>Only the server module works.</li>
+</ul>
+
+<h2>v0.3.0</h2>
+
+<ul>
+    <li>Removal of the Protocols dependency. There's no logging at the moment.</li>
+    <li>Modules are moved to their own object.</li>
+    <li>BiSubscriber handlers the subscribing of events to either the IRCMessageEmitter or the IRCCommandEmitter.</li>
+    <li>Default NRC Modules are disabled (until the next version)</li>
+</ul>
+
+<h2>v0.2.0</h2>
+
+<ul>
+    <li>Module system added.</li>
+</ul>
+
+<h2>v0.1.0</h2>
+
+<ul>
+    <li>Rewrite of original nrc module.</li>
+</ul>

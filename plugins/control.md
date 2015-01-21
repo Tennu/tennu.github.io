@@ -16,7 +16,27 @@ None
 
 All of these commands require the user be an admin for them to perform.
 
+All of these commands require the user be an admin for them to perform.
+
+### !say target message
+
+Has the bot say (via PRIVMSG) the message to the target.
+
+### !act target action
+
+Has the bot act the action to the target.
+
+### !notice target message
+
+Has the bot send a notice to the target
+
+### !ctcp target CtcpType CtcpMessage
+
+Sends a CTCP to the target.
+
 ### !join &lt;channel&gt;
+
+Has the bot join the channel. Does not currently work for channels with passwords.
 
 ### !part \[&lt;channel&gt;\]
 
@@ -27,7 +47,19 @@ give you the help message for the command.
 
 ### !quit \[&lt;reason&gt;\]
 
-### !nick &lt;new-nick&gt;
+Has the bot quit, possibly with the specified reason.
+
+### !nick new-nick
+
+Has the bot change its nickname to the specified nickname.
+
+### !mode target +modes parameters
+
+Has the bot perform the mode changes.
+
+`target` can either be the bot's nickname or a channel.
+
+Works exactly like `/mode` would in your IRC client.
 
 ## Exports
 

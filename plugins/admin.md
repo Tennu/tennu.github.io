@@ -32,19 +32,6 @@ to be considered an admin.
 
 ## Commands
 
-All of these commands require the user be an admin for them to perform.
-
-### !join &lt;channel&gt;
-
-### !part \[&lt;channel&gt;\]
-
-If the channel is not given, the bot will part the current channel.
-
-If you part in a query without giving a channel, the bot will instead
-give you the help message for the command.
-
-### !quit \[&lt;reason&gt;\]
-
 ## Exports
 
 ### isAdmin(hostmask: Hostmask): boolean
