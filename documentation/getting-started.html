@@ -154,7 +154,7 @@ var BLTPlugin = {
 
             help: {
                 'givemeblt': [
-                    '!givemeblt',
+                    '{{!}}givemeblt',
                     ' ',
                     'Gives the requestor a juicy BLT.'
                 ]
@@ -176,7 +176,7 @@ module.exports = BLTPlugin;
 <p>
   If you have never used Node.js before, the final line may confuse you.
   It just means that the Node module is exporting the object at
-  <code>BLTPlugin</code>. If it was not there, Tennu (or any other node module)
+  <code>BLTPlugin</code>. If it was not there, Tennu (or any node module)
   would not be able to access the plugin.
 </p>
 
@@ -250,7 +250,8 @@ module.exports = TennuModuleName;
   <dt>help</dt>
   <dd>
     This is a hook for the <a href="/plugins/help">help</a> plugin to
-    provide help for your commands and other topics.
+    provide help for your commands and other topics. Note the usage of
+    <code>{{!}}</code> instead of a hard-coded command handler here.
   </dd>
 
   <dt>commands</dt>
