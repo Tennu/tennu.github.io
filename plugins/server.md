@@ -2,7 +2,6 @@
 layout: plugin
 title: Server Plugin
 ---
-# Server Plugin
 
 This plugin is built-in.
 
