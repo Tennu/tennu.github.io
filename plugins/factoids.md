@@ -19,6 +19,7 @@ The bot will listen to private messages, and when it sees a private message that
 
     <dt>factoids-trigger</dt>
     <dd>Optional String. Only private messages that start with the trigger will look up factoids.</dd>
+</dl>
 
 ## Commands
 
