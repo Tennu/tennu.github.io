@@ -3,7 +3,7 @@ layout: plugin
 title: Factoids Plugin
 ---
 
-This plugin adds a factoids system 
+This plugin adds a way of storing standard responses for common queries.
 
 It has no required dependencies, but optionally depends on the <a href="admin">admin</a> role/plugin. Just make sure that you load the admin role/plugin before you load this plugin. If you just pass the plugin names to the configuration, make sure this plugin is after the admin role/plugin.
 
@@ -50,7 +50,7 @@ The bot will listen to private messages, and when it sees a private message that
     <dt>!lock &lt;factoid-name&gt;</dt>
     <dd>Locks a factoid so that only an admin can create and edit it. You must be an admin to use this command.</dd>
 
-    <dt>!unlock &gt;factoid-name&gt;</dt>
+    <dt>!unlock &lt;factoid-name&gt;</dt>
     <dd>Removes a lock from a factoid. You must be an admin to use this command.</dd>
 </dl>
 
