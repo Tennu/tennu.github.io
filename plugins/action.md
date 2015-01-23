@@ -22,9 +22,9 @@ None
 
     <dt>act(target: Target, action: String | [String])</dt>
     <dd>
-        Commit an action to the target. Basically what your client's <code>/me</code> does.
+        <p>Commit an action to the target. Basically what your client's <code>/me</code> does.</p>
 
-        Example: <code>client.act("#chan", "plays the ukelele.");</code>
+        <p>Example: <code>client.act("#chan", "plays the ukelele.");</code></p>
     </dd>
 
     <dt>ctcp(target: Target, type: CtcpType)</dt>
@@ -47,9 +47,9 @@ None
 
     <dt>mode(target: Target, plus: String, minus: String, params: [String])</dt>
     <dd>
-        Attempt to change modes on the target.
+        <p>Attempt to change modes on the target.</p>
 
-        Ex: <code>client.mode(client.nickname(), "B", "", [])</code>
+        <p>Ex: <code>client.mode(client.nickname(), "B", "", [])</code></p>
     </dd>
 
     <dt>nick(newNick: NickName)</dt>
@@ -69,9 +69,9 @@ None
 
     <dt>quit(reason: String)</dt>
     <dd>
-        Cause the bot to quit with the specified reason.
+        <p>Cause the bot to quit with the specified reason.</p>
 
-        Note: The reason is ignored on many servers if the bot quits within the first minute.
+        <p>Note: The reason is ignored on many servers if the bot quits within the first minute.</p>
     </dd>
 
     <dt>say(target: Target, message: String | [String])</dt>
