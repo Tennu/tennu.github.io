@@ -185,6 +185,8 @@ module.exports = BLTPlugin;
 </p>
 
 {% highlight JavaScript %}
+// Initialization of the node module.
+
 var TennuPluginName = {
     init: function (client, imports) {
         // Initialization of the plugin.
@@ -209,11 +211,11 @@ var TennuPluginName = {
             },
 
             commands: ['command']
-        }
+        };
     }
 };
 
-module.exports = TennuModuleName;
+module.exports = TennuPluginName;
 {% endhighlight %}
 
 <p>

@@ -1,0 +1,327 @@
+---
+layout: document
+title: Write a Plugin
+---
+
+<p>In this article, we will write a plugin. Specifically, we will write a plugin that lets users add a <i>friend code</i><sup>1</sup> for their nickname, and look up the friend codes of others. The friend codes will be persisted to disk, and we'll let users remove their friend code should they decide they do not want to be friendly.</p>
+
+<p>For this article, we are going to be implementing both the persistence logic and IRC interface logic together. This is normally bad design, as the plugin should really only be plugging some service provided in IRC-agnostic code with IRC. We"ll look at refactoring this out in another article<sup>2</sup>.
+
+<p>For persistence, we'll be using the <a href="//npmjs.org/package/dirty">Dirty DB</a>. Don't worry if you've never heard of it, it's a trivial to use database. It"s an extremely basic key-value database that you've probably never heard of, but is perfect for our use case. Just imagine it as a single persistent object.</p>
+
+<h2>Project Setup</h2>
+
+<p>Depending on whether you want to share your plugin with others or not, there are two ways to get started - locally or externally. You can always move from local to external.</p>
+
+<h3>External (Public) Plugin</h3>
+
+<p>If you want to contribute to the Tennu platform with a plugin for others to install, setting up an external plugin is the way to do so.</p>
+
+<p>An external plugin is a plugin that is an <code>npm</code> package. So, to start out, create a new <code>npm</code> project. Create a directory for the project, create a code repo (probably git) both locally and wherever you store remote repoes (probably GitHub), and run <code>npm init</code> filling out the questions as appropriate. The package name should be the name of your plugin prefixed with <code>"tennu-"</code>. For this plugin, it'd be <code>tennu-friend-code</code>. A good name for the main file is <code>plugin.js</code>.</p>
+
+<p>The next step is to create <code>plugin.js</code>, and the rest of the article will discuss that. Live testing and plublishing your plugin are other things you'll want to do, explained in the following paragraphs.</p>
+
+<p>When you want to live-test the plugin, you have a few options.</p>
+
+<ul>
+    <li>If your plugin is a single file, you can install the plugin locally into your bot and test there.</li>
+    <li>If the plugin is more than a single file, you can install with <a href="//docs.npmjs.com/cli/link">npm link</a>.</li>
+    <li>If you want to test in a custom bot for your plugin, add <code>tennu</code> as a devDependency, and add a <code>test-bot</code> directory with the <code>config.json</code> file. Just make sure to add the directory to your <code>.npmignore</code> file so you don"t publish it.</li>
+</ul>
+
+<p>When your plugin is well tested and ready to be published, change the version to <code>1.0.0</code> in the <code>package.json</code>, and <code>npm publish</code>. Then you can <a href="use-a-public-tennu-plugin">install</a> it like any public plugin.</p>
+
+<h3>Local (Private) Plugin</h3>
+
+<p>If, for whatever reason, you do not want to publish your plugin for others to use, follow these instructions.</p>
+
+<ol>
+    <li>Create a directory in your bot's project <code>tennu_plugins</code> if you have not already done so.</li>
+    <li>Create a file that is the name of your plugin. In our case, <code>friend-code.js</code>.
+    <li>Write the plugin in the created file.</li>
+</li>
+
+<h2>Plugin Skeleton</h2>
+
+<p>Now that we have a file to edit your plugin in, we should start with a skeleton. The one shown on the <a href="/documentation/getting-started">Getting Started</a> tutorial is as good as any, so let us start with that.</p>
+
+{% highlight JavaScript %}
+// Initialization of the node module.
+
+var TennuPluginName = {
+    init: function (client, imports) {
+        // Initialization of the plugin.
+
+        return {
+            exports: {
+                // Exported properties.
+            },
+
+            handlers: {
+                "!command": function (command) {
+                    // Handle the command
+                }
+            },
+
+            help: {
+                "command": [
+                    "!command &lt;command&gt;",
+                    " ",
+                    "Help info about command."
+                ]
+            },
+
+            commands: ["command"]
+        }
+    }
+};
+
+module.exports = TennuPluginName;
+{% endhighlight %}
+
+<h2>First Edits</h2>
+
+<p>We"ll want to do a few things.</p>
+
+<ul>
+    <li>Replace TennuPluginName with the name of our plugin. Let us call it FriendCode.</li>
+    <li>Determine if we want to export anything. Now, we <i>could</i> export a function to let other plugins look up friend codes, but <abbr title="You Aint Gonna Need It">YAGNI</abbr>, so we will export nothing, and remove the property from our returned plugin instance.</li>
+    <li>
+        <p>What handlers and commands we need. In this case, we need three command handlers and a handler for the "error" event<sup>3</sup> to cleanup.</p>
+        <ul>
+            <li><code>!addfriendcode</code> - A command to add a friend code.</li>
+            <li><code>!delfriendcode</code> - A command to remove a friend code.</li>
+            <li><code>!friendcode</code> - A command to look up a friend code.</li>
+        </ul>
+        <p>We need to add them to the commands array, and add a handler and help entry for each command.</p>
+    </li>
+</ul>
+
+<p>Putting that altogether, and we get a plugin structure that looks like this.</p>
+
+{% highlight JavaScript %}
+// initialization of the node module
+
+var FriendCode = {
+    init: function (client, imports) {
+        // Initialization of the plugin.
+
+        return {
+            handlers: {
+                "!friendcode": function (command) {
+                    // Handle the command
+                },
+
+                "!addfriendcode": function (command) {
+                    // Handle the command
+                },
+
+                "!delfriendcode": function (command) {
+                    // Handle the command
+                },
+
+                "error": function (error) {
+                    // deinitialization code.
+                }
+            },
+
+            help: {
+                "friendcode": [
+                    "{{!}}friendcode &lt;nickname&gt;",
+                    " ",
+                    "Help info about command."
+                ],
+
+                "addfriendcode": [
+                    "{{!}}addfriendcode &lt;friend-code&gt;",
+                    " ",
+                    "Help info about command."
+                ],
+
+                "delfriendcode": [
+                    "{{!}}delfriendcode",
+                    " ",
+                    "Help info about command."
+                ]
+            },
+
+            commands: ["friendcode, addfriendcode, delfriendcode"]
+        };
+    }
+};
+
+module.exports = FriendCode;
+{% endhighlight %}
+
+<h2>Initialization &amp; Cleanup</h2>
+
+<p>Next up, let"s set up the initialization code. There are two points of initialization: One more the module and one for the plugin. Anything that doesn"t change if you were running two bots simultaneously in the same program (which is possible) is placed before FriendCode is defined. Anything that is bot specific goes in the init function before you return the plugin.</p>
+
+<p>The only module level initialization we have to do is importing in the Dirty DB constructor. First make sure you've added it to your dependencies (<code>npm install dirty --save</code><sup>4</sup>) and then add this line to the top of your plugin: <code>var Dirty = require("dirty");</code>.</p>
+
+<p>But there"s also a utility function <code>format</code> on the built-in <code>util</code> module. We are also going to require it to make our string handling code nicer.</p>
+
+<p>In the plugin initialization, we need to create an instance of the Dirty DB, and to do so, we need a location of the database. Since we don"t want to assume a location for the database, we'll ask users to add it to their config file. We can then read the value in the config file with <code>client.config("config-key-name")</code>. As per a convention in Tennu, we call this config value <code>%plugin-name%-database</code> or in our case, <config>friend-code-database</config>.</p>
+
+<p>If you haven"t read the documentation for the Dirty DB, you create one by calling <code>Dirty(relativePath)</code>, and if the database exists, it'll use that database. Otherwise, it'll create that file and use it as the database. If for whatever reason the program doesn"t have access to the file it's trying to create, such as permissions errors or the directory doesn"t exist, it'll throw an error. We won"t worry about handling such errors here.</p>
+
+<p>Finally, we are supposed to close the database connection when we are done with it. This is done via the <code>close</code> method.<p>
+
+<p>Given all of this, let"s write it into code for our plugin.</p>
+
+{% highlight JavaScript %}
+var Dirty = require("dirty");
+var format = require("util").format;
+
+var FriendCode = {
+    init: function (client, imports) {
+        var databaseLocation = client.config("friend-code-database");
+        var db = Dirty(databaseLocation);
+
+        return {
+            handlers: {
+                "!friendcode": function (command) {
+                    // Handle the command
+                },
+
+                "!addfriendcode": function (command) {
+                    // Handle the command
+                },
+
+                "!delfriendcode": function (command) {
+                    // Handle the command
+                },
+
+                error: function (_) {
+                    db.close();
+                }
+            },
+
+            help: {
+                "friendcode": [
+                    "{{!}}friendcode &lt;nickname&gt;",
+                    " ",
+                    "Help info about command."
+                ],
+
+                "addfriendcode": [
+                    "{{!}}addfriendcode &lt;friend-code&gt;",
+                    " ",
+                    "Help info about command."
+                ],
+
+                "delfriendcode": [
+                    "{{!}}delfriendcode",
+                    " ",
+                    "Help info about command."
+                ]
+            },
+
+            commands: ["friendcode, addfriendcode, delfriendcode"]
+        };
+    }
+};
+
+module.exports = FriendCode;
+{% endhighlight %}
+
+<h2>Handlers</h2>
+
+<p>Alright, we have a database open, but our commands do not do anything. We need to implement them. But what information does each command need?</p>
+
+<p>The <code>!friendcode</code> command needs to know where to send the message and what argument is passed to it. You can either find out which channel (or nickname if private message) a command was sent using the <code>"channel"</code> property of the <code>command</code> object passed to the handler, or you could just return your response as one of the <a href="/documentation/api/response">Response</a> formats. We"ll be returning the String response type for this and the rest of our commands. For the argument, it'll be on the <code>"args"</code> property of the <code>command</code> object. Since a nickname is only ever one word, it'll be the first arg, or <code>command.args[0]</code>.</p>
+
+<p>Both <code>!addfriendcode</code> and <code>!delfriendcode</code> need to know who is sending the command. This is easily found out with the <code>"nickname"</code> property on the <code>command</code> object. <code>!addfriendcode</code> also takes a friend code. While friend codes usually do not contain spaces, we'll be general and allow them<sup>5</sup>. Tennu doesn"t send the entire arguments as a simple string, so to get a multi-word argument, you slice the number of single-word arguments precede it and then join with a space. In our case, that would be <code>client.args.slice(0).join(" ")</code>, but since we know that <code>.slice(0)</code> returns a copy of the array and <code>.join(" ")</code> doesn"t mutate the array, we can leave it out when there are no single-word arguments.</p>
+
+<p>Then, with this information, we need to set, get, or delete the proper information, and respond with the proper message. We should also make sure to check to make sure the user has a friend code before deleting it, and report that they already don"t have one if they do not.</p>
+
+<p>We also add the proper help for these commands.</p>
+
+{% highlight JavaScript %}
+var Dirty = require("dirty");
+var format = require("util").format;
+
+var FriendCode = {
+    init: function (client, imports) {
+        var databaseLocation = client.config("friend-code-database");
+        var db = Dirty(databaseLocation);
+
+        return {
+            handlers: {
+                "!friendcode": function (command) {
+                    var friend = command.args[0];
+
+                    var friendcode = db.get(friend);
+
+                    if (friendcode) {
+                        return format("Friendcode for %s: %s", friend, friendcode);
+                    } else {
+                        return format("Friendcode for %s not found.", friend);
+                    }
+                },
+
+                "!addfriendcode": function (command) {
+                    var code = command.args.join(" ");
+                    var friend = command.nickname;
+
+                    db.set(friend, code);
+                    return format("%s: Friend code set!", friend);
+                },
+
+                "!delfriendcode": function (command) {
+                    var friend = command.nickname;
+
+                    if (db.get(friend)) {
+                        db.rm(friend);
+                        return format("%s: Friend Code deleted.", friend);
+                    } else {
+                        return format("%s: You already have no friend code.", friend);
+                    }
+                },
+
+                error: function (_) {
+                    db.close();
+                }
+            },
+
+            help: {
+                "friendcode": [
+                    "{{!}}friendcode &lt;nickname&gt;",
+                    " ",
+                    "Lookup the friendcode for that nickname."
+                ],
+
+                "addfriendcode": [
+                    "{{!}}addfriendcode &lt;friend-code&gt;",
+                    " ",
+                    "Add or change your friend code to the bot."
+                ],
+
+                "delfriendcode": [
+                    "{{!}}delfriendcode",
+                    " ",
+                    "Remove your friend code from the bot."
+                ]
+            },
+
+            commands: ["friendcode, addfriendcode, delfriendcode"]
+        };
+    }
+};
+
+module.exports = FriendCode;
+{% endhighlight %}
+
+<h2>Final Notes</h2>
+
+At this point, your plugin is complete. Add "friend-code" to your plugins list, and add a new property to your <code>config.json</code>, <code>"friend-code-database"</code>. If you aren't sure where to put your database, make a directory <code>databases</code> in your bot's directory and make it <code>"databases/friend-codes.db"</code>. Then start your bot, and enjoy the new functionality.
+
+<h2>Footnotes</h2>
+
+<ol>
+    <li>This example was choosen for the Brave Frontier IRC channel, through other services also use friend codes, such as Nintendo.</li>
+    <li>And an article after that may even show how to abstract the friend code logic into any per-user lookup command triple generating module.</li>
+    <li>The "error" event in this case is what is sent by the IRC servers to tell you that you have ended your connection to it. It is <bold>not</bold> an actual error. Blame the original IRC specification author for this.</li>
+    <li>If you don"t have a package.json, leave off the <code>--save</code> parameter.</li>
+    <li>A good example of where allowing more than one word for the friend code is in Brave Frontier where some people have multiple accounts and thus multiple friend codes, so they could send <code>!addfriendcode BF: 000000, JP: 111111</code>.</li>
+</ol>
