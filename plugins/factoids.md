@@ -18,7 +18,7 @@ The bot will listen to private messages, and when it sees a private message that
     <dd><b>Required String</b>. A relative path from the current working directory to the location of the factoids database.</dd>
 
     <dt>factoids-trigger</dt>
-    <dd>Optional String. Only private messages that start with the trigger will look up factoids.</dd>
+    <dd>Optional String. Only messages that start with the trigger will look up factoids.</dd>
 </dl>
 
 ## Commands
