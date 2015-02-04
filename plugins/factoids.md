@@ -35,7 +35,53 @@ The bot will listen to private messages, and when it sees a private message that
     <dd>
         <p>Learn a factoid by the name of the factoid. By default, "&lt;factoid-name&gt; is " is prefixed to the description. This will also add the time and hostmask of the editor to the database, though that's not accessible from the plugin directly.</p>
 
-        <p>You can also prefix &lt;reply&gt; or &lt;action&gt; to the description to remove the prefix or make the bot respond with an action.</p>
+        <p>You can also use other operators than just <code>=</code>.</p>
+
+        <dl>
+            <dt>!=</dt>
+            <dd>
+                <p>Make the factoid response an action.</p>
+                <p>
+                    Ex:<br>
+<pre>[user] !learn dance != does a jig.
+[bot] Learned factoid 'dance'.
+[user] !dance
+* bot does a jib</pre>
+                </p>
+            </dd>
+
+            <dt>:=</dt>
+            <dd>
+                <p><i>Define</i> a term by prefixing the response with the key and the word is. The case of the key matters.</p>
+                <p>
+                    Ex:<br>
+<pre>[user] !learn Moon := a place made out of cheese.
+[bot] Learned factoid 'moon'.
+[user] !define
+[bot] Moon is a place made out of cheese.</pre>
+                </p>
+            </dd>
+
+            <dt>+=</dt>
+            <dd>
+                <p>Appends more to the description of a factoid. The factoid must already exist.</p>
+
+                <p>
+                    Ex:<br>
+<pre>[user] !math
+[bot] 2 + 2 = 4. 2 * 3 = 6.
+[user] !learn math += 10 - 7 = 3.
+[bot] Successfully did replacement on 'math'
+[user] !math
+[bot] 2 + 2 = 4. 2 * 3 = 6. 10 - 7 = 3.</pre>
+                </p>
+            </dd>
+
+            <dt>~= s/search/replace/</dt>
+            <dd>
+                <p>Does a sed-style search and replace on the description. The search is a JavaScript regular expression. The replace is a string. Currently, you may not include a "/" on either side. If you don't know regular expressions, you should not use this variant except for literal to literal translations using only alphanumeric, spaces, and periods.</p>
+            </dd>
+        </dl>
 
         <p>If the factoid is locked, you must be an admin to be able to edit it.</p>
     </dd>
