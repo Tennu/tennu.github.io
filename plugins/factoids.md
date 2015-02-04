@@ -57,7 +57,7 @@ The bot will listen to private messages, and when it sees a private message that
                     Ex:<br>
 <pre>[user] !learn Moon := a place made out of cheese.
 [bot] Learned factoid 'moon'.
-[user] !define
+[user] !moon
 [bot] Moon is a place made out of cheese.</pre>
                 </p>
             </dd>
