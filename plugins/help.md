@@ -1,8 +1,7 @@
 ---
 layout: plugin
-title: Admin Plugin
+title: Help Plugin
 ---
-# Help Plugin
 
 This plugin let's you administrate your bots.
 

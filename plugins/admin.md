@@ -2,7 +2,6 @@
 layout: plugin
 title: Admin Plugin
 ---
-# Admin Plugin
 
 This plugin let's you administrate your bots.
 
