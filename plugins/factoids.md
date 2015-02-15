@@ -31,7 +31,7 @@ The bot will listen to private messages, and when it sees a private message that
         <p>Failure to find a factoid will be reported.</p>
     </dd>
 
-    <dt>!learn &lt;factiod-name&gt; = &lt;factoid-description&gt;</dt>
+    <dt>!learn &lt;factoid-name&gt; = &lt;factoid-description&gt;</dt>
     <dd>
         <p>Learn a factoid by the name of the factoid. By default, "&lt;factoid-name&gt; is " is prefixed to the description. This will also add the time and hostmask of the editor to the database, though that's not accessible from the plugin directly.</p>
 
