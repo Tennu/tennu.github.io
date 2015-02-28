@@ -37,6 +37,9 @@ title: Documentation
     <dt id="config-capab">capab</dt>
     <dd>This sends the <a href="http://www.leeh.co.uk/draft-mitchell-irc-capabilities-02.html#ls"><code>CAP LS</code></a> command to the server. It does no other handling, and Tennu has no specific <code>CAPAB</code> handling at this time.</dd>
 
+    <dt id="config-daemon">daemon</dt>
+    <dd>The IRCd used by the network you are connecting to. Some networks have IRCd specific features, such as UnrealIRCd having user mode +B for signifying a user is a bot or Twitch doing special stuff like a command <code>PRIVMSG #chan :!color twitchColorCode</code> actually do something. The value should be one of the ones in this array: <code>["unreal", "inspired", "twitch"]</code></dd>
+
     <dt id="config-nickname">nickname</dt>
     <dd>
         <p>The nickname to join with. By default, we use 'tennubot'.</p>
