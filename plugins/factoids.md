@@ -62,6 +62,14 @@ The bot will listen to private messages, and when it sees a private message that
                 </p>
             </dd>
 
+            <dt>@=</dt>
+            <dd>
+                <p>Aliases the key on the left to the key on the right.</p>
+
+                <p>Note: The alias is not smart, and if the key it aliases doesn't exist, it'll being aliasing nothing.</p>
+                <p>Note: Modifying this factoid with `+=` or `~=` modifies what key this is aliasing, the the response itself.</p>
+            </dd>
+
             <dt>+=</dt>
             <dd>
                 <p>Appends more to the description of a factoid. The factoid must already exist.</p>
