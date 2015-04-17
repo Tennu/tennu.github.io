@@ -5,7 +5,7 @@ layout: document
 
 ## Command Properties
 
-A `Command` is a (`Message`)[message-properties] with all PRIVMSG properties, with the 'command' property repurposed and an additional 'args' property.
+A `Command` is a [`Message`](message-properties) with all PRIVMSG properties, with the 'command' property repurposed and an additional 'args' property.
 
 * args     - Array of the words following the command. E.g., with `!foo x y z`, will be `["x", "y", "z"]`.
 * channel  - In the case of a query, the channel is the nickname of the user who sent the message.
