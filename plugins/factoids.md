@@ -7,7 +7,7 @@ This plugin adds a way of storing standard responses for common queries.
 
 It has no required dependencies, but optionally depends on the <a href="admin">admin</a> role/plugin. Just make sure that you load the admin role/plugin before you load this plugin. If you just pass the plugin names to the configuration, make sure this plugin is after the admin role/plugin.
 
-The database is a <a href="//npmjs.org/package/dirty">Dirty</a> db, choosen because it requires no binary parts or starting a remote server.
+The database is a <a href="https://npmjs.org/package/dirty">Dirty</a> db, choosen because it requires no binary parts or starting a remote server.
 
 The bot will listen to private messages, and when it sees a private message that matches a factoid key, the bot will respond with the description that matches the key. You can add a trigger that must prefix the key with configuration.
 
@@ -19,6 +19,9 @@ The bot will listen to private messages, and when it sees a private message that
 
     <dt>factoids-trigger</dt>
     <dd>Optional String. Only messages that start with the trigger will look up factoids.</dd>
+
+    <dt>factoids-max-alias-depth</dt>
+    <dd>Optional Number. Maximum (integral) aliases to dive into before giving up. Defaults to 3.</dd>
 </dl>
 
 ## Commands
@@ -85,9 +88,11 @@ The bot will listen to private messages, and when it sees a private message that
                 </p>
             </dd>
 
-            <dt>~= s/search/replace/</dt>
+            <dt>~= s/search/replace/flags</dt>
             <dd>
-                <p>Does a sed-style search and replace on the description. The search is a JavaScript regular expression. The replace is a string. Currently, you may not include a "/" on either side. If you don't know regular expressions, you should not use this variant except for literal to literal translations using only alphanumeric, spaces, and periods.</p>
+                <p>Does a sed-style search and replace on the description. The search is a JavaScript regular expression. The replace is a string. To use a "/" in either search or replace, use "\/". If you don't know regular expressions, you should not use this variant except for literal to literal translations using only alphanumeric, spaces, and periods.</p>
+
+                <p>The flags are either "", "g", "i", or "gi".</p>
             </dd>
         </dl>
 
@@ -115,3 +120,7 @@ None
 ## Hooks
 
 None
+
+## Source
+
+<a href="https://github.com/tennu/tennu-factoids">GitHub</a>
