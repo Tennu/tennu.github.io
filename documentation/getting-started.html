@@ -218,6 +218,8 @@ var TennuPluginName = {
 module.exports = TennuPluginName;
 {% endhighlight %}
 
+<p class="warn">Inside a plugin's source code, the command trigger is always <code>"!"</code>. Do <b>not</b> change it. Changing the command trigger in <code>config.json</code> is sufficient.</p> 
+
 <p>
   The Tennu <a href="api/plugin-factory">Plugin Factory</a> is an object with a single property, <code>init</code>.
   This property contains a function that takes two
