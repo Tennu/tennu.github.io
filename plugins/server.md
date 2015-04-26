@@ -55,6 +55,6 @@ None
   </dd>
 </dl>
 
-## Module Hooks
+## Plugin Hooks
 
 None

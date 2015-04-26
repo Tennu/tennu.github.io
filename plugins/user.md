@@ -25,6 +25,6 @@ This is true if one of the following is true:
 1. The user is identified and the nickname they are using is registered to them.
 2. The user is identified and the accountname is their accountname.
 
-## Module Hooks
+## Plugin Hooks
 
 None

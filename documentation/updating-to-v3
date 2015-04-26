@@ -1,0 +1,25 @@
+---
+layout: document
+title: Updating to v.3.0.0
+---
+
+<p>Major version bumps happen when there's something backwards incompatible. They don't necessarily introduce major changes 
+
+<p>The change from Tennu v.2.x.y to v.3.x.y involves <code>irc-socket</code> also being updated from v.2.3.x to v.3.0.1. With this change, a lot of configuration options were renamed and some changed behavior.</p>
+
+<p class="warning">If your bot connects to Twitch.tv, <b>do not</b> update to this version. It <b>will not</b> connect.</p>
+
+<h2>Configuration</h2>
+
+<ul>
+    <li>The <code>secure</code> property was removed entirely in favor of passing in a <code>TlsSocket</code> directly, although Tennu provides the equivalent functionality, but under a new property, <code>tls</code>.</li>
+    <li>The <code>nickname</code> property was changed to <code>nicknames</code> and now takes an array of nicknames.</li>
+    <li>The <code>capab</code> property was changed to <code>capabilities</code> and is now an object. By default, Tennu also <i>requires</i> the IRCv3 capabilities <code>multi-prefix</code> and <code>userhost-in-names</code><sup>*</sup>.</li>
+    <li>The <code>ipv6</code> and <code>localAddress</code> properties were subsumed into sub-properties of <code>connectOptions</code>. Specifically, <code>"ipv6": true, "localAddress": "x", ...</code> becomes <code>"connectOptions": { "family": 6, "localAddress": "x" }, ...</code>.
+</ul>
+
+<p><b>*</b> This is so that we can get Dan Ugore's <code>channel</code> plugin into Tennu ASAP. Once it is in, it'll be modified to understand that it does not need these if the <code>network</code>
+
+<h2>Deprecated Method Removal</h2>
+
+<p>The <code>Client</code> method <code>getModule</code> has been removed. You should have been using <code>getPlugin</code> anyways.</p>

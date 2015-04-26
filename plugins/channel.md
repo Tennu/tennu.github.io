@@ -2,7 +2,7 @@
 layout: plugin
 title: Channel Plugin
 ---
-# Channel Module
+# Channel Plugin
 
 This plugin is built-in.
 
@@ -16,6 +16,6 @@ None
 
 None
 
-## Module Hooks
+## Plugin Hooks
 
 None
