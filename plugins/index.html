@@ -9,24 +9,89 @@ title: Plugins
 
 <p>These plugins are built into Tennu, and do not need to be installed manually.</p>
 
-<ul>
-  <li><a href="help">Help</a></li>
-  <li><a href="user">User</a></li>
-  <li><a href="channel">Channel</a></li>
-  <li><a href="server">Server</a></li>
-  <li><a href="action">Action</a></li>
-</ul>
+<table>
+  <tr>
+    <th>Plugin</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="action">action</a></td>
+    <td>Command the Client to interact with the server.</td>
+  </tr>
+  <tr>
+    <td><a href="channel">channel</a></td>
+    <td>[<b>Stub</b>] Query information about channels.</td>
+  </tr>
+  <tr>
+    <td><a href="help">help</a></td>
+    <td>Provides <code>!help</code> and <code>!commands</code></td>
+  </tr>
+  <tr>
+    <td><a href="user">user</a></td>
+    <td>[<b>Stub</b>] Query information about users. Currently just who a user is identifed as, if anybody.</td>
+  </tr>
+  <tr>
+    <td><a href="server">server</a></td>
+    <td>Query information about the server. Currently just the <code>ISUPPORT</code> info.</td>
+  </tr>
+</table>
 
 <h2>Downloadable Plugins</h2>
 
 <p>You can install these with plugins with `npm install tennu-%plugin-name%`.</p>
 
-<ul>
-  <li><a href="admin">Admin</a></li>
-  <li><a href="control">Control</a></li>
-  <li><a href="factoids">Factoids</a></li>
-  <!--<li><a href="github">GitHub</a></li>-->
-  <li><a href="jshelp">JSHelp</a></li>
-  <li><a href="last-seen">Last Seen</a></li>
-  <li><a href="luck">Luck</a></li>
-</ul>
+<table>
+  <tr>
+    <th>Plugin</th>
+    <th>Dependencies</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="admin">admin</a></td>
+    <td>None</td>
+    <td>Provides <code>admin</code> role. Lets other plugins make commands only accessible to admins.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.npmjs.com/package/tennu-bfdata">bfdata</a></td>
+    <td>None</td>
+    <td>[<b>Undocumented</b>] Brave Frontier data querying.</td>
+  </tr>
+  <tr>
+    <td><a href="control">control</a></td>
+    <td><a href="admin">admin</a></td>
+    <td>Provides commands for admins to control the bot from the server.</td>
+  </tr>
+  <tr>
+    <td><a href="factoids">factoids</a></td>
+    <td>(Optionally) <a href="admin">admin</a></td>
+    <td>Canned responses associated with specific words.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.npmjs.com/package/tennu-friend-code">friend-code</a></td>
+    <td>None</td>
+    <td>[<b>Undocumented</b>] Example plugin for <a href="/documentation/by-example/create-a-plugin">Create A Plugin</a> article.</td>
+  </tr>
+  <tr>
+    <td><a href="jshelp">jshelp</a></td>
+    <td>None</td>
+    <td>Commands for assisting users with learning JavaScript.</td>
+  </tr>
+  <tr>
+    <td><a href="last-seen">last-seen</a></td>
+    <td>None</td>
+    <td>Says the last time a user was seen.</td>
+  </tr>
+  <tr>
+    <td><a href="luck">luck</a></td>
+    <td>None</td>
+    <td>Commands for randomness, including a dice roller.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.npmjs.com/package/tennu-messaging">messaging</a></td>
+    <td>None</td>
+    <td>[<b>Undocumented</b>] Sort of like MemoServ.</td>
+  <tr>
+    <td><a href="poll">poll</a></td>
+    <td><a href="admin">admin</a></td>
+    <td>[<b>Poorly Documented</b>] Per-channel polls.</td>
+  </tr>

@@ -26,6 +26,6 @@ See when users where last around.
 
 <span class="none">None</span>
 
-## Module Hooks
+## Plugin Hooks
 
 <span class="none">None</span>
