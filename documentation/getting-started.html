@@ -72,7 +72,7 @@ title: Getting Started
     "server": "irc.your-network.net",
     "password": null,
     "port": 6667,
-    "nickname": "BLTBot",
+    "nicknames": ["BLTBot"],
     "username": "blt",
     "realname": "BLTBot in tennu",
     "channels": ["#chan"],
@@ -102,33 +102,8 @@ title: Getting Started
 <p>
   The plugins property already contains a plugin, <code>blt</code>. We haven't
   written it yet, but this will be its name. Any plugins you want to load,
-  including their dependencies, must be listed in this array.
-  The only exception are the plugins built into Tennu itself:
-</p>
-
-<dl>
-  <dt><a href="/plugins/server">Server</a></dt>
-  <dd>Exposes functions that give information about the server.</dd>
-
-  <dt><a href="/plugins/action">Action</a></dt>
-  <dd>
-    Coming eventually, this plugin will provide the actions your bot uses
-    to do things on the server. These commands are available on the
-    client object, and will continue to be.
-  </dd>
-
-  <dt><a href="/plugins/user">User</a></dt>
-  <dd>Exposes functions that give information about the server's users.</dd>
-
-  <dt><a href="/plugins/channel">Channel</a></dt>
-  <dd>Exposes functions that give information about the server's channels.</dd>
-
-  <dt><a href="/plugins/help">Help</a></dt>
-  <dd>Controls the commands !help and !commands</dd>
-</dl>
-
-<p class="note">
-  Most of these plugins currently expose no functionality.
+  including their dependencies, must be listed in this array, not counting
+  Tennu's default plugins which provide the base functionality of the bot.
 </p>
 
 <h2>Writing the BLT Module</h2>
