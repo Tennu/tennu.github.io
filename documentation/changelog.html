@@ -9,9 +9,10 @@ title: Changelog
     <li>Added: <code>irc-socket</code> dependency upgradee to at least <code>v.3.0.2</code>.</li>
     <li>Added: <code>after-events</code> dependency upgraded to at least <code>v.1.0.1</code>.</li>
     <li>Added: <code>NicknameTracker</code> object removed, replaced by <a href="/plugins/self"><code>self</code> plugin</a>.</li>
-    <li>Added: Request and require <code>multi-prefix</code> and <code>userhost-in-names</code> capabilities.</li>
+    <li>Added: Request and require <code>multi-prefix</code>  capability.</li>
     <li>Added: <code>tennu.Client()</code> throws an error if the Logger is missing a method.</li>
     <li>Removal: <code>Client.prototype.getModule</code> removed. Use <code>Client.prototype.getPlugin</code> instead.</li>
+    <li>Tests: Moved <code>mock-net-socket</code> to <a href="https://www.npmjs.com/package/@havvy/mock-net-socket"><code>@havvy/mock-net-socket</code></a>.</li>
 </ul>
 
 <h3>Update Notes</h3>
@@ -113,7 +114,7 @@ title: Changelog
 
 <ul>
     <li>Bugfix: Do not throw error calling Logger.note instead of Logger.notice in Client.quit</li>
-    <li>Bugfix: Readded removed space in string from incorrect refactoring in untested method Client.userhost.</li>
+    <li>Bugfix: Readded removed space in string from incorrect refactoring in untested method <code>Client.userhost</code>.</li>
 </ul>
 
 <h2>v2.0.0</h2>
@@ -439,7 +440,7 @@ Just a version bump to start using SemVer for real. Tennu still isn't feature co
     <li>Added an IrcOutputSocket class. NRC absorbs it of course.</li>
     <li>Added everything to the index.</li>
     <li>Got Dependency Injection for all non-structure objects.</li>
-    <li>Added `userhost` method to IrcOutputSocket/NRC.</li>
+    <li>Added <code>userhost</code> method to IrcOutputSocket/NRC.</li>
 </ul>
 
 <h2>v0.4.1</h2>

@@ -3,7 +3,7 @@ layout: document
 title: Updating to v.3.0.0
 ---
 
-<p>Major version bumps happen when there's something backwards incompatible. They don't necessarily introduce major changes 
+<p>Major version bumps happen when there's something backwards incompatible. They don't necessarily introduce major changes, though this one is a somewhat major change, since every configuration object/json file has to be fixed.</p>
 
 <p>The change from Tennu v.2.x.y to v.3.x.y involves <code>irc-socket</code> also being updated from v.2.3.x to v.3.0.1. With this change, a lot of configuration options were renamed and some changed behavior.</p>
 
@@ -14,7 +14,7 @@ title: Updating to v.3.0.0
 <ul>
     <li>The <code>secure</code> property was removed entirely in favor of passing in a <code>TlsSocket</code> directly, although Tennu provides the equivalent functionality, but under a new property, <code>tls</code>.</li>
     <li>The <code>nickname</code> property was changed to <code>nicknames</code> and now takes an array of nicknames.</li>
-    <li>The <code>capab</code> property was changed to <code>capabilities</code> and is now an object. By default, Tennu also <i>requires</i> the IRCv3 capabilities <code>multi-prefix</code> and <code>userhost-in-names</code><sup>*</sup>.</li>
+    <li>The <code>capab</code> property was changed to <code>capabilities</code> and is now an object. By default, Tennu also <i>requires</i> the IRCv3 capabilities <code>multi-prefix</code><sup>*</sup>.</li>
     <li>The <code>ipv6</code> and <code>localAddress</code> properties were subsumed into sub-properties of <code>connectOptions</code>. Specifically, <code>"ipv6": true, "localAddress": "x", ...</code> becomes <code>"connectOptions": { "family": 6, "localAddress": "x" }, ...</code>.
 </ul>
 

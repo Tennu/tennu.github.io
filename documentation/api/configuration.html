@@ -16,39 +16,32 @@ title: Documentation
     <dt id="config-port">port</dt>
     <dd>The port to connect to. By default, <code>6667</code>.</dd>
 
-    <dt id="config-ipv6">ipv6</dt>
-    <dd>Sets the <code>ipv6</code> property in the net.Socket() constructor to this value. Defaults to true.</dd>
-
-    <dt id="config-localAddress">localAddress</dt>
-    <dd>Sets the <code>localAddress</code> property in the net.Socket() constructor to this value. Defaults to undefined.</dd>
-
-    <dt id="config-secure">secure</dt>
+    <dt id="config-secure">tls</dt>
     <dd>
         <p>Uses a TLS socket instead of a non-TLS socket. Since most networks don't have valid SSL certifications, this setting does not require them to be. False by default.</p>
-
-        <p class="note">When this setting is true, the <a href="#dependency-NetSocket">NetSocket</a> is ignored unless the <a href="#dependency-IrcSocket">IrcSocket</a> is changed. This is a bug, and if you want to fix it, please send a pull request to <a href="https://github.com/havvy/irc-socket"><code>irc-socket</code>'s github</a>.</p>
 
         <p class="note">When this setting is true, <code>ipv6</code> and <code>localAddress</code> are ignored. It doesn't look possible to set them on TLS sockets in Node 0.10.x.</p>
     </dd>
 
+    <dt id="config-connectOptions">connectOptions</dt>
+    <dd>Options object passed to the <code>NetSocket.connect</code> method when called. See <a href="https://iojs.org/api/net.html#net_socket_connect_options_connectlistener">io.js's documentation</a> for what values are permitted. The values <code>host</code> and <code>port</code> are automatically set by the options <a href="#config-server"><code>server</code></a> and <a href="#config-port"><code>port</code></a> respectively. If you want to connect via IPv6, pass <code>"family": 6</code> with this object.</dd>
+
     <dt id="config-password">password</dt>
     <dd>The server for the password. Most servers don't have passwords, and this can be left undefined.</dd>
 
-    <dt id="config-capab">capab</dt>
-    <dd>This sends the <a href="http://www.leeh.co.uk/draft-mitchell-irc-capabilities-02.html#ls"><code>CAP LS</code></a> command to the server. It does no other handling, and Tennu has no specific <code>CAPAB</code> handling at this time.</dd>
+    <dt id="config-capab">capabilities</dt>
+    <dd>An object for which wanted and required <a href="http://ircv3.net/specs/core/capability-negotiation-3.1.html">capabilities</a> can be requested. The object has two properties, <code>wants</code> and <code>requires</code> which are both arrays of capability names. Tennu currently requires <a href="http://ircv3.net/specs/extensions/multi-prefix-3.1.html"><code>multi-prefix</code></a>.</dd>
 
     <dt id="config-daemon">daemon</dt>
     <dd>The IRCd used by the network you are connecting to. Some networks have IRCd specific features, such as UnrealIRCd having user mode +B for signifying a user is a bot or Twitch doing special stuff like a command <code>PRIVMSG #chan :!color twitchColorCode</code> actually do something. The value should be one of the ones in this array: <code>["unreal", "inspired", "twitch"]</code></dd>
 
-    <dt id="config-nickname">nickname</dt>
+    <dt id="config-nickname">nicknames</dt>
     <dd>
-        <p>The nickname to join with. By default, we use 'tennubot'.</p>
-
-        <p class="note">If the nickname is erronous or already taken, Tennu takes no current action, and the socket will eventually be closed by the network.</p>
+        <p>The nicknames to join with. By default, we use <code>['tennubot']</code>.</p>
     </dd>
 
     <dt id="config-username">username</dt>
-    <dd>The username to use. By default, we use 'tennu'</dd>
+    <dd>The username to use. By default, we use <code>'tennu'</code>.</dd>
 
     <dt id="config-realname">realname</dt>
     <dd>Also known as the gecos, the realname is a field where you can put an arbitrary name, including spaces. By default, we set it to the current version of Tennu.</dd>
