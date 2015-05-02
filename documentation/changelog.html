@@ -3,38 +3,43 @@ layout: document
 title: Changelog
 ---
 
-<!--<h2>The lifecycle update (Not yet published)</h2>
-
-This update deals with error handling and disconnection by telling each plugin when they happen.
-
-It'll probably be a while before this is published though. It feels sort of like implementing Erlang's OTP stuff.
+<h2>v3.0.0</h2>
 
 <ul>
-    <li>Bugfix: <code>Client.disconnect()</code> didn't returns the client when already disconnected.</li>
-    <li>Plugin hook: 'die' called when client dies unexpectedly.</li>
-    <li><code>Client.prototype.die(from: string, cause: object)</code> added for force killing a client.</li>
-</ul>-->
+    <li>Added: <code>irc-socket</code> dependency upgradee to at least <code>v.3.0.2</code>.</li>
+    <li>Added: <code>after-events</code> dependency upgraded to at least <code>v.1.0.1</code>.</li>
+    <li>Added: <code>NicknameTracker</code> object removed, replaced by <a href="/plugins/self"><code>self</code> plugin</a>.</li>
+    <li>Added: Request and require <code>multi-prefix</code> and <code>userhost-in-names</code> capabilities.</li>
+    <li>Added: <code>tennu.Client()</code> throws an error if the Logger is missing a method.</li>
+    <li>Removal: <code>Client.prototype.getModule</code> removed. Use <code>Client.prototype.getPlugin</code> instead.</li>
+</ul>
+
+<h3>Update Notes</h3>
+
+<p>See <a href="/documentation/updating/to-3.0.0">Updating to v3.0.0</a> for how to update. The majority of the update is just updating configuration values.</p>
+
+<p>For this release, we require the the networks you connect with to have those IRCv3 capabilities. This will be relaxed in the future, but the <code>channel</code> plugin will be sort of dependent upon it. Once the channel plugin is in, we'll find a way to make parts of it work without those capabilities, or at minimum, have a version that doesn't tell you the op/voice/etc. modes of the users so it works on Twitch.</p>
 
 <h2>v2.3.0</h2>
 
 <ul>
     <li><a href="https://github.com/Tennu/tennu/commit/86f8fc1ca692395eba5b2a6f8afc8639068efd6d">Bugfix</a>: <code>Client.mode</code> with mode parameters actually works.</li>
-    <li><a href="https://github.com/Tennu/tennu/commit/1d585cf40a2f32a2d94f75d1d774a7dd6f4c8dba">Enhancement</a>: Modelist Message Extensions (Thanks Dan_Ugore)</li>
+    <li><a href="https://github.com/Tennu/tennu/commit/1d585cf40a2f32a2d94f75d1d774a7dd6f4c8dba">Added</a>: Modelist Message Extensions (Thanks Dan_Ugore)</li>
 
 <h2>v2.2.0</h2>
 
 <ul>
     <li>Package: Require <a href="https://npmjs.org/package/r-result">r-result</a>.</li>
     <li>Bugfix: Cast <code>timestamp</code> to <code>Number</code> in <code>RPL_TOPICWHOTIME</code></li>
-    <li>Enhancement: <b>Breaking</b>: Make <code>.join("#channel")</code> return a <code>Promise&lt;Result&lt;JoinInfo, FailMessage&gt;, Error&gt;</code></li>
-    <li>Enhancement: Change <code>JoinInfo</code> to be better designed.</li>
+    <li>Added: <b>Breaking</b>: Make <code>.join("#channel")</code> return a <code>Promise&lt;Result&lt;JoinInfo, FailMessage&gt;, Error&gt;</code></li>
+    <li>Added: Change <code>JoinInfo</code> to be better designed.</li>
     <li>Bugfix: Quit showing errors on successful joins.</li>
     <li>Tests: Test Join succeeds case, Timeout case.</li>
-    <li>Enhancement: <code>Client.whois(user)</code> returns a <code>Promise&lt;Result&lt;WhoisInfo, FailMessage&gt;, Error&gt;</code></li>
+    <li>Added: <code>Client.whois(user)</code> returns a <code>Promise&lt;Result&lt;WhoisInfo, FailMessage&gt;, Error&gt;</code></li>
     <li>Refactor: User plugin's <code>isIdentifiedas(nickname)</code> function now uses <code>Client.whois</code>'s promise.</li>
-    <li>Enhancement: Message extensions for 421 (<code>ERR_UNKNOWNCOMMAND</code>)</li>
-    <li>Enhancement: Add <code>message.channels</code> to <code>RPL_WHOISCHANNELS</code></li>
-    <li>Enhancement: Added more whois response message extensions.</li>
+    <li>Added: Message extensions for 421 (<code>ERR_UNKNOWNCOMMAND</code>)</li>
+    <li>Added: Add <code>message.channels</code> to <code>RPL_WHOISCHANNELS</code></li>
+    <li>Added: Added more whois response message extensions.</li>
     <li>Bugfix: Unsubscribe from timeouts when unsubscribing handlers in <code>.join()</code>, <code>.whois()</code>.</li>
     <li>Bugfix: Normalize channel properties in new message handlers to lowercase as specified in docs.</li>
 </ul>
@@ -53,11 +58,11 @@ It'll probably be a while before this is published though. It feels sort of like
 
 <ul>
     <li>Internal: Add lambda-match to plugins macros.</li>
-    <li>Enhancement: "help-helpfile" config option for replacing !help nullary-arg helpfile</li>
+    <li>Added: "help-helpfile" config option for replacing !help nullary-arg helpfile</li>
     <li>Refactor: Single quoted strings to double quoted in various files.</li>
-    <li>Enhancement: Rewrite Client.join to return a more useful promise.</li>
+    <li>Added: Rewrite Client.join to return a more useful promise.</li>
     <li>
-        <p>Enhancement: Message extensions for the following message types.</p>
+        <p>Added: Message extensions for the following message types.</p>
         <ul>
             <li>ERR_UNAVAILRESOURCE</li>
             <li>ERR_NEEDMOREPARAMS</li>
@@ -70,14 +75,14 @@ It'll probably be a while before this is published though. It feels sort of like
             <li>ERR_OPERONLY</li>
         </ul>
     </li>
-    <li>Enhancement: Add Client.kick(channel, nickname)</li>
+    <li>Added: Add Client.kick(channel, nickname)</li>
     <li>Bugfix: Client.log should pass level to logger, not to client.</li>
-    <li>Enhancement: Action.raw should log source and arguments separately.</li>
+    <li>Added: Action.raw should log source and arguments separately.</li>
     <li>Bugfix: Client.notice(target, [message]) was not implemented.</li>
     <li>Refactor: Move OutputSocket functionality to Action plugin.</li>
     <li>Bugfix: Make Client.getPlugin &amp; related return their return value, and not the Client.</li>
     <li>Bugfix: BiSubscriber.off("!x") did not actually work.</li>
-    <li>Enhancement: BiSubscriber methods are now case-insensitive.</li>
+    <li>Added: BiSubscriber methods are now case-insensitive.</li>
     <li>Removal: Removed Client.out. Not gonna make this v.3.0.0 because nobody was using it.</li>
 </ul>
 
