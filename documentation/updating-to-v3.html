@@ -18,7 +18,7 @@ title: Updating to v.3.0.0
     <li>The <code>ipv6</code> and <code>localAddress</code> properties were subsumed into sub-properties of <code>connectOptions</code>. Specifically, <code>"ipv6": true, "localAddress": "x", ...</code> becomes <code>"connectOptions": { "family": 6, "localAddress": "x" }, ...</code>.
 </ul>
 
-<p><b>*</b> This is so that we can get Dan Ugore's <code>channel</code> plugin into Tennu ASAP. Once it is in, it'll be modified to understand that it does not need these if the <code>network</code>
+<p><b>*</b> This is so that we can get Dan Ugore's <code>channel</code> plugin into Tennu ASAP. Once it is in, it'll be modified to understand that it does not need these if the <code>network</code> is <code>"twitch"</code>.</p>
 
 <h2>Deprecated Method Removal</h2>
 
