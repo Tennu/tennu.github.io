@@ -14,6 +14,7 @@ title: Changelog
     <li>Changed: Removed <code>after-events</code> handling for commands in favor of dispatching to <code>messages</code> plugin. Visible in logging because it'll say <code>PluginMessages</code> instead of <code>PluginCommands</code> in the logger output.</li>
     <li>Internal: Replaced <code>lodash</code> with individual lodash function modules.</li>
     <li>Removed: <code>client.events</code> property. Use the <code>on</code>, <code>once</code>, and <code>off</code> methods on the client instead. Or the <code>handlers</code> hook if inside a plugin.</li>
+    <li>Added: Replyname for numeric 001 (<code>RPL_WELCOME</code>) message.</li>
 </ul>
 
 <h3>Upgrade Notes</h3>
