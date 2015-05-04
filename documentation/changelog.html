@@ -15,6 +15,9 @@ title: Changelog
     <li>Internal: Replaced <code>lodash</code> with individual lodash function modules.</li>
     <li>Removed: <code>client.events</code> property. Use the <code>on</code>, <code>once</code>, and <code>off</code> methods on the client instead. Or the <code>handlers</code> hook if inside a plugin.</li>
     <li>Added: Replyname for numeric 001 (<code>RPL_WELCOME</code>) message.</li>
+    <li>Added: <code>PluginCommands.isCommand(Message)</code>.</li>
+    <li>Added: <code>PluginMessages.afterEmit(function)</code>.</li>
+    <li>Bugfix: Allow <code>command-trigger: ""</code> to work.</li>
 </ul>
 
 <h3>Upgrade Notes</h3>

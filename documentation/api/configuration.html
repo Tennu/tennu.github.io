@@ -69,10 +69,16 @@ title: Documentation
     </dd>
 
     <dt id="config-command-trigger">command-trigger</dt>
-    <dd>The trigger command to look for in privmsgs to determine whether the message is a <a href="commands">command</a> or not. Defaults to '!'. May be multiple characters. If the empty string, all messages will be treated as commands. It must be a string.</dd>
+    <dd>The trigger command to look for in privmsgs to determine whether the message is a <a href="command-properties">command</a> or not. Defaults to <code>"!"</code>. May be multiple characters. When passed the empty string, every <code>PRIVMSG</code> counts as a command.</dd>
+
+    <dt id="config-command-ignore-list">command-ignore-list</dt>
+    <dd>A list of commands to not treat as commands. Could be useful for disabling built-in commands from the <a href="/plugins/help"><code>help</code></a> plugin, or selectively disabling commands from a plugin you only want a few commands from.</dd>
 
     <dt id="config-disable-help">disable-help</dt>
-    <dd>Disables the <a href="/plugins/help">help</a> plugin. False by default.</dd>
+    <dd>
+        <p>[<b>Deprecated</b>] Use <code>"command-ignore-list": ["commands", "help"]</code> instead.</p>
+        <p>Disables the <a href="/plugins/help">help</a> plugin. False by default.</p>
+    </dd>
 </dl>
 
 <h2>Dependency Management</h2>

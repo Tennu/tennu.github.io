@@ -11,6 +11,8 @@ This plugin let's you administrate your bots.
 
 ### disable-help: boolean
 
+[<b>Deprecated</b>] Use <code>"command-ignore-list": ["commands", "help"]</code> instead.
+
 Disables the plugin.
 
 ## Commands
