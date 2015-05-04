@@ -18,13 +18,16 @@ title: Changelog
     <li>Added: <code>PluginCommands.isCommand(Message)</code>.</li>
     <li>Added: <code>PluginMessages.afterEmit(function)</code>.</li>
     <li>Bugfix: Allow <code>command-trigger: ""</code> to work.</li>
+    <li>Deprecate: Config property <code>disable-help</code>. Use <code>command-ignore-list: ["commands", "help"]</code> instead.</li>
 </ul>
 
 <h3>Upgrade Notes</h3>
 
 <p>I don't think anybody is using <code>client.events</code>, but that should be easily fixable, and keeping it around doesn't actually confer any benefits.</p>
 
-<p>If for some reason you have two or more command handlers for the same command, 
+<p>If for some reason you have two or more command handlers for the same command, add one of them to the ignore list, or create a plugin that provides a hook for the command.</p>
+
+<p><code>disable-help</code> is deprecated in favor of specifically ignoring the commands. Letting the entire plugin be disabled would mean that you would have to be careful with any plugins that depend on it.</p>
 
 <h2>v3.0.0</h2>
 
