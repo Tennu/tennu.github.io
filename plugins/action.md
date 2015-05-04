@@ -55,7 +55,7 @@ None
     <dt>nick(newNick: NickName)</dt>
     <dd>Attempt to change the bots nickname.</dd>
 
-    <dt>notice(target: Target, message: String | [String])</dt>
+    <dt id="command-notice">notice(target: Target, message: String | [String])</dt>
     <dd>Send a notice to the target.</dd>
 
     <dt>part(channel: ChannelName)</dt>

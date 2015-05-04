@@ -1,0 +1,33 @@
+---
+title: Logger
+layout: document
+---
+
+<h2>API Docs</h2>
+
+<p>A <code>Logger</code> is an object with the following methods, each a log level listed in order of level:</p>
+
+<ol>
+    <li><code>debug</code></li>
+    <li><code>info</code></li>
+    <li><code>notice</code></li>
+    <li><code>warn</code></li>
+    <li><code>error</code></li>
+    <li><code>crit</code></li>
+    <li><code>alert</code></li>
+    <li><code>emerg</code></li>
+</ol>
+
+<p>Each method takes an arbitary number of strings as arguments.</p>
+
+<p>These log levels were decided upon by looking at the log levels provided by default in the popular Node.js logging library <a href="https://npmjs.org/package/winston">Winston</a>.</p>
+
+<h2>Tennu Integration</h2>
+
+<p>Tennu's base plugins will always pass two arguments. The first string, called the <i>source</i>, being one of <code>"Tennu"</code>, <code>"&lt;-"</code>, <code>"-&gt;"</code>, or the name of a plugin prefixed with plugin such as <code>"PluginMessages"</code>.</p>
+
+<p>Tennu will never send a log level above <code>error</code>. Those are reserved for your plugins that do really important things.</p>
+
+<p>Tennu uses the <code>info</code> level for showing what messages are going in and out of Tennu. The source for incoming messages is <code>"&lt;-"</code> while for outgoing messages it is <code>"-&gt;"</code>.
+
+<p>These methods are also callable on the <a href="client">client</a> object. They have the same names except that <code>Logger.notice</code> is <code>Client.note</code> because <code>Client.notice</code> is used by the <a href="/plugins/action#command-notice"><code>action</code> plugin</a>. Alternatively, you may use the <code>log</code> method which takes the log level name as the first argument with the rest of the arguments being strings that are sent as is to the appropriate method.</p>
