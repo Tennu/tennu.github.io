@@ -6,12 +6,12 @@ title: Changelog
 <h2>v3.0.0</h2>
 
 <ul>
-    <li>Added: <code>irc-socket</code> dependency upgraded to at least <code>v.3.0.5</code>.</li>
+    <li>Changed: [<b>Breaking</b>] <code>irc-socket</code> dependency upgraded to at least <code>v.3.0.5</code>.</li>
     <li>Added: <code>after-events</code> dependency upgraded to at least <code>v.1.0.1</code>.</li>
-    <li>Added: <code>NicknameTracker</code> object removed, replaced by <a href="/plugins/self"><code>self</code> plugin</a>.</li>
-    <li>Added: Request and require <code>multi-prefix</code>  capability.</li>
-    <li>Added: <code>tennu.Client()</code> throws an error if the Logger is missing a method.</li>
-    <li>Removal: <code>Client.prototype.getModule</code> removed. Use <code>Client.prototype.getPlugin</code> instead.</li>
+    <li>Added: <code>NicknameTracker</code> module moved into <a href="/plugins/self"><code>self</code> plugin</a>.</li>
+    <li>Added: Request and require IRCv3 <code>multi-prefix</code>  capability.</li>
+    <li>Added: <code>tennu.Client()</code> throws an error if the <code>Logger</code> is missing a method.</li>
+    <li>Removed: <code>Client.prototype.getModule</code> removed. Use <code>Client.prototype.getPlugin</code> instead.</li>
     <li>Tests: Moved <code>mock-net-socket</code> to <a href="https://www.npmjs.com/package/@havvy/mock-net-socket"><code>@havvy/mock-net-socket</code></a>.</li>
 </ul>
 
