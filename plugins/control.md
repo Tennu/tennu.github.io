@@ -2,7 +2,6 @@
 layout: plugin
 title: Control Plugin
 ---
-# Control Plugin
 
 This plugin let's you control your bots.
 
@@ -10,7 +9,7 @@ This bot requires the <a href="roles/admin">admin</a> role.
 
 ## Config
 
-None
+<p class="none">None</p>
 
 ## Commands
 

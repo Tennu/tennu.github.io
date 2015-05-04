@@ -3,6 +3,25 @@ layout: document
 title: Changelog
 ---
 
+<h2>v4.0.0</h2>
+
+<ul>
+    <li>Changed: <code>BiSubscriber</code> module removed, replaced with <a href="https://npmjs.org/package/prefix-event-subscriber"><code>PrefixEventSubscriber</code></a> and placed into the built-in plugin <a href="/plugins/subscriber"><code>subscriber</code></a>.</li>
+    <li>Refactor: <code>MessageHandler</code> module moved into <a href="/plugins/messages"><code>messages</code></a> plugin.</li>
+    <li>Refactor: <code>CommandHandler</code> module moved into <a href="/plugins/commands"><code>commands</code></a> plugin.</li>
+    <li>Removed: Various unused files in the <code>lib</code> directory.</li>
+    <li>Changed: [<b>Breaking</b>] Only one handler is allowed per command.</li>
+    <li>Changed: Removed <code>after-events</code> handling for commands in favor of dispatching to <code>messages</code> plugin. Visible in logging because it'll say <code>PluginMessages</code> instead of <code>PluginCommands</code> in the logger output.</li>
+    <li>Internal: Replaced <code>lodash</code> with individual lodash function modules.</li>
+    <li>Removed: <code>client.events</code> property. Use the <code>on</code>, <code>once</code>, and <code>off</code> methods on the client instead. Or the <code>handlers</code> hook if inside a plugin.</li>
+</ul>
+
+<h3>Upgrade Notes</h3>
+
+<p>I don't think anybody is using <code>client.events</code>, but that should be easily fixable, and keeping it around doesn't actually confer any benefits.</p>
+
+<p>If for some reason you have two or more command handlers for the same command, 
+
 <h2>v3.0.0</h2>
 
 <ul>

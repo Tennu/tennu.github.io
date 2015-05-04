@@ -3,6 +3,8 @@ layout: plugin
 title: Help Plugin
 ---
 
+<p class="built-in">This plugin is built-in.</p>
+
 This plugin let's you administrate your bots.
 
 ## Config
@@ -23,7 +25,7 @@ Should no topic be given, the help topic for the help command will be given.
 
 In the case that there is no topic for the topic, the bot will respond with:
 
-&gt; Help message for selected topic does not exist.
+<pre>&gt; Help message for selected topic does not exist.</pre>
 
 All responses will be in query.
 

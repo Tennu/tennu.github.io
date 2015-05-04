@@ -3,7 +3,7 @@ layout: plugin
 title: Action Plugin
 ---
 
-This plugin is built-in.
+<p class="built-in">This plugin is built-in.</p>
 
 This plugin provides ways to communicate with the server. All of its exports properties are available on the [Client](/documentation/api/client).
 

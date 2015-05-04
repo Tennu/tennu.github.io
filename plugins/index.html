@@ -23,12 +23,20 @@ title: Plugins
     <td>[<b>Stub</b>] Query information about channels.</td>
   </tr>
   <tr>
+    <td><a href="commands">commands</a></td>
+    <td>Parses commands from <code>privmsg</code>s and emits them as events.</td>
+  </tr>
+  <tr>
+    <td><a href="ctcp">ctcp</a></td>
+    <td>A plugin that does not currently exist, but will in the future. Handles the Client-to-Client-Protocol things, including providing a repsonse to the <code>version</code> ctcp request.</td>
+  </tr>
+  <tr>
     <td><a href="help">help</a></td>
     <td>Provides <code>!help</code> and <code>!commands</code></td>
   </tr>
   <tr>
-    <td><a href="user">user</a></td>
-    <td>[<b>Stub</b>] Query information about users. Currently just who a user is identifed as, if anybody.</td>
+    <td><a href="messages">messages</a></td>
+    <td>Listens to the <code>IrcSocket</code>, turning each line into a <a href="/documentation/api/message-properties">message</a> event.</td>
   </tr>
   <tr>
     <td><a href="self">self</a></td>
@@ -37,6 +45,14 @@ title: Plugins
   <tr>
     <td><a href="server">server</a></td>
     <td>Query information about the server. Currently just the <code>ISUPPORT</code> info.</td>
+  </tr>
+  <tr>
+    <td><a href="subscriber">subscriber</a></td>
+    <td>Provides the <code>handlers</code> plugin hook.</td>
+  </tr>
+  <tr>
+    <td><a href="user">user</a></td>
+    <td>[<b>Stub</b>] Query information about users. Currently just who a user is identifed as, if anybody.</td>
   </tr>
 </table>
 

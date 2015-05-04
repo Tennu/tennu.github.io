@@ -1,0 +1,42 @@
+---
+layout: plugin
+title: Subscriber Plugin
+---
+
+<p class="built-in">This plugin is built-in.</p>
+
+<p>This plugin provides the <code>handlers</code> plugin hook from which you can subscribe to <code>messages</code>' and <code>commands</code>' event emitters, amongst others. When write a plugin, this is how you are supposed to subscribe to these events. Each event type has a prefix with exception to the <code>messages</code> event emitter which requires no prefix.</p>
+
+<!-- TODO(Havvy): Discussion about space delimited names, example usage. -->
+
+<h2>Commands</h2>
+
+<p class="none">None</p>
+
+<h2>Exports</h2>
+
+<dl>
+    <dt><code>on</code>, <code>off</code>, <code>once</code></dt>
+    <!-- TODO(Havvy): Finish this sentence. -->
+    <dd>These three functions take an object where the strings are the events to...</dd>
+
+    <dt><code>defaultPrefix: Sentinel object</code></dt>
+    <dd>
+        <p>The sentinel value passed to the subscribe hook's prefix property to specify that you are adding a default subscriber.</p>
+        <p>You shouldn't need to use this, since Tennu already uses the default subscriber for messages.</p>
+    </dd>
+</dl>
+
+<h2>Plugin Hooks</h2>
+
+<h3><code>subscribe: {prefix: String, emitter: EventEmitter}</code></h3>
+
+<p>This hook lets you add a new event emitter for the subscriber to dispatch to.</p>
+
+<p class="note">Note: A plugin may only add one subscription. If you need to add more, file an <a href="https://github.com/Tennu/tennu/issues">issue.</a>.</p>
+
+<p>It is recommended that non-built-in plugins set the prefix as some word related to the plugin followed by a colon. For example, when the <code>ctcp</code> plugin is written, it'll subscribe the prefix <code>"ctcp:"</code>.</p>
+
+<h3><cod>handlers: Object&lt;EventNames, Handler&gt;</code></h3>
+
+<!-- TODO(Havvy): Figure out what to put here. -->
