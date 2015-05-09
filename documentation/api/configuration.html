@@ -5,7 +5,7 @@ title: Documentation
 
 <p>The configuration object is passed to the Tennu Client factory. It defines what you can do with your bot.</p>
 
-<p>In the configuration object, <code>undefined</code> and <code>null</code> and lack of property are treated equivalently.</p>
+<p>In the configuration object, <code>undefined</code>,<code>null</code>, and lack of property are treated equivalently.</p>
 
 <h2>IRC Socket Configuration</h2>
 
@@ -72,7 +72,7 @@ title: Documentation
     <dd>The trigger command to look for in privmsgs to determine whether the message is a <a href="command-properties">command</a> or not. Defaults to <code>"!"</code>. May be multiple characters. When passed the empty string, every <code>PRIVMSG</code> counts as a command.</dd>
 
     <dt id="config-command-ignore-list">command-ignore-list</dt>
-    <dd>A list of commands to not treat as commands. Could be useful for disabling built-in commands from the <a href="/plugins/help"><code>help</code></a> plugin, or selectively disabling commands from a plugin you only want a few commands from.</dd>
+    <dd>A list of commands to not treat as commands. They will not show up in the <code>!commands</code>. Could be useful for disabling built-in commands from the <a href="/plugins/help"><code>help</code></a> plugin, or selectively disabling commands from a plugin you only want a few commands from.</dd>
 
     <dt id="config-disable-help">disable-help</dt>
     <dd>

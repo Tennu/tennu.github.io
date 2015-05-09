@@ -23,7 +23,7 @@ title: Changelog
 
 <h3>Upgrade Notes</h3>
 
-<p>I don't think anybody is using <code>client.events</code>, but that should be easily fixable, and keeping it around doesn't actually confer any benefits.</p>
+<p>I don't think anybody is using <code>client.events</code>, but that should be easily fixable, and keeping it around doesn't actually confer any benefits. Either use the methods on the <code>client</code> directory or call <code>client.getPlugin("subscriber")</code> and call the methods on that.</p>
 
 <p>If for some reason you have two or more command handlers for the same command, add one of them to the ignore list, or create a plugin that provides a hook for the command.</p>
 
