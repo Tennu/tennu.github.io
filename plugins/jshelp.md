@@ -3,10 +3,7 @@ layout: plugin
 title: JS Help Plugin
 ---
 
-# JSHelp Plugin
-
-This plugin let's you help yourself and others with JavaScript
-in your channels.
+This plugin let's you help yourself and others with JavaScript in your channels.
 
 ## Config
 
