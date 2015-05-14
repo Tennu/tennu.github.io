@@ -27,10 +27,13 @@ None
         <p>Example: <code>client.act("#chan", "plays the ukelele.");</code></p>
     </dd>
 
-    <dt>ctcp(target: Target, type: CtcpType)</dt>
+    <dt>ctcp(target: Target, tag: CtcpTag, body: undefined | String| [String])</dt>
+    <dd>[<b>Deprecated</b>] Send a CTCP request or response to the target.</dd>
+
+    <dt>ctcpRequest(target: Target, tag: CtcpTag, body: undefined | String | [String])</dt>
     <dd>Send a CTCP request to the target.</dd>
 
-    <dt>ctcp(target: Target, type: CtcpType, body: String | [String])</dt>
+    <dt>ctcpResponse(target: Nickname, type: CtcpTag, body: undefined | String | [String])</dt>
     <dd>Send a CTCP response to the target.</dd>
 
     <dt>join(channel: ChannelName): Promise&lt;JoinResponse></dt>

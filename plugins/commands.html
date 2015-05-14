@@ -7,16 +7,37 @@ title: Commands Plugin
 
 <p>This plugin listens to <a href="messages"><code>privmsg</code></a> events, determining whether it's a command invocation, creating a <a href="/documentation/api-/command-properties"><code>Command</code></a> and firing off a command event when it is. The event name is the name of the command. You can subscribe to these events using the <a href="subscriber"><code>handlers</code></a> plugin hook.</p>
 
+<h3>Example</h3>
+
+{% highlight JavaScript %}
+var FooPlugin = {
+    name: "ctcp-finger",
+    init: function (client, deps) {
+        return {
+            handlers: {
+                "!foo": function (command) {
+                    return "bar.";
+                }
+            }
+        };
+    },
+
+    // Technically not needed, since Tennu provides
+    // these before it even tries to load your plugins.
+    requires: ["subscriber", "messages", "commands"]
+};
+
+module.exports = FooPlugin;
+{% endhighlight %}
+
 <h3>Config</h3>
 
 <dl>
-    <dt><code>ignored-commands: [String]</code></dt>
+    <dt><code>command-trigger: String</code></dt>
+    <dd>The prefix to search for in PRIVMSGs in channels to determine whether the message is a command.</dd>
+    <dt><code>command-ignore-list: [String]</code></dt>
     <dd>A list of commands that the handler will not be called for. Useful for when you only want specific commands from a plugin.</dd>
 </dl>
-
-<h3>Commands</h3>
-
-<p class="none">None</p>
 
 <h3>Exports</h3>
 
@@ -24,7 +45,3 @@ title: Commands Plugin
     <dt>isCommand(Message)</dt>
     <dd>Returns true if the Message is a command. Otherwise returns false.</dd>
 </dl>
-
-<h3>Plugin Hooks</h3>
-
-<p class="none">None</p>

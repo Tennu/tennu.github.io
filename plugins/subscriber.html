@@ -9,9 +9,37 @@ title: Subscriber Plugin
 
 <!-- TODO(Havvy): Discussion about space delimited names, example usage. -->
 
-<h2>Commands</h2>
+<h2>Base Subscriptions</h2>
 
-<p class="none">None</p>
+<p>There are four base emitters in Tennu that you can subscribe to.</p>
+
+<table>
+    <tr>
+        <th>Prefix</th>
+        <th>Providing Plugin</th>
+        <th>Functionality Given</th>
+    </tr>
+    <tr>
+        <td>(none)</td>
+        <td><a href="messages">Messages</a></td>
+        <td>Access to <a href="/documentation/api/message-properties">Message</a> events sent from the IRC Server.</td>
+    </tr>
+    <tr>
+        <td>!</td>
+        <td><a href="commands">Commands</a></td>
+        <td>Access to <a href="/documentation/api/command-properties">Command</a> events parsed from PRIVMSGs.</td>
+    </tr>
+    <tr>
+        <td>action:</td>
+        <td><a href="action">Action</a></td>
+        <td>Access to the results of various actions performed by the client.</td>
+    </tr>
+    <tr>
+        <td>ctcp:</td>
+        <td><a href="ctcp">Ctcp</a></td>
+        <td>Access to <a href="/documentation/api/ctcp-request">CtcpRequest</a> events parsed from PRIVMSGs.</td>
+    </tr>
+</table>
 
 <h2>Exports</h2>
 

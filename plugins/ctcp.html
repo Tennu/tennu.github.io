@@ -1,0 +1,31 @@
+---
+layout: plugin
+title: CTCP Plugin
+---
+
+<p class="built-in">This plugin is built-in.</p>
+
+<p>This plugin listens to <a href="messages"><code>privmsg</code></a> events, determining whether it's a ctcp, creating a <a href="/documentation/api/ctcp-request"><code>CtcpRequest</code></a> and firing off a command event when it is. The event name is the CTCP tag. You can subscribe to these events using the <a href="subscriber"><code>handlers</code></a> plugin hook. the prefix is <code>"ctcp:"</code> and the event name is case-insensitive. The return value is the <code>message</code> property of a <a href="/documentation/api/response">Response</a> where the intent is "ctcpResponse".</p>
+
+<h3>Example</h3>
+
+{% highlight JavaScript %}
+var FingerCtcpPlugin = {
+    name: "ctcp-finger",
+    init: function (client, deps) {
+        return {
+            handlers: {
+                "ctcp:finger": function (ctcp) {
+                    return "Poke back.";
+                }
+            }
+        };
+    },
+
+    // Technically not needed, since Tennu provides
+    // these before it even tries to load your plugins.
+    requires: ["subscriber", "messages", "ctcp"]
+};
+
+module.exports = FingerCtcpPlugin;
+{% endhighlight %}
