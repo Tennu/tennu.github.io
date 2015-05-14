@@ -16,13 +16,6 @@ title: Documentation
     <dt id="config-port">port</dt>
     <dd>The port to connect to. By default, <code>6667</code>.</dd>
 
-    <dt id="config-secure">tls</dt>
-    <dd>
-        <p>Uses a TLS socket instead of a non-TLS socket. Since most networks don't have valid SSL certifications, this setting does not require them to be. False by default.</p>
-
-        <p class="note">When this setting is true, <code>ipv6</code> and <code>localAddress</code> are ignored. It doesn't look possible to set them on TLS sockets in Node 0.10.x.</p>
-    </dd>
-
     <dt id="config-connectOptions">connectOptions</dt>
     <dd>Options object passed to the <code>NetSocket.connect</code> method when called. See <a href="https://iojs.org/api/net.html#net_socket_connect_options_connectlistener">io.js's documentation</a> for what values are permitted. The values <code>host</code> and <code>port</code> are automatically set by the options <a href="#config-server"><code>server</code></a> and <a href="#config-port"><code>port</code></a> respectively. If you want to connect via IPv6, pass <code>"family": 6</code> with this object.</dd>
 
@@ -31,9 +24,6 @@ title: Documentation
 
     <dt id="config-capab">capabilities</dt>
     <dd>An object for which wanted and required <a href="http://ircv3.net/specs/core/capability-negotiation-3.1.html">capabilities</a> can be requested. The object has two properties, <code>wants</code> and <code>requires</code> which are both arrays of capability names. Tennu currently requires <a href="http://ircv3.net/specs/extensions/multi-prefix-3.1.html"><code>multi-prefix</code></a>.</dd>
-
-    <dt id="config-daemon">daemon</dt>
-    <dd>The IRCd used by the network you are connecting to. Some networks have IRCd specific features, such as UnrealIRCd having user mode +B for signifying a user is a bot or Twitch doing special stuff like a command <code>PRIVMSG #chan :!color twitchColorCode</code> actually do something. The value should be one of the ones in this array: <code>["unreal", "inspired", "twitch"]</code></dd>
 
     <dt id="config-nickname">nicknames</dt>
     <dd>
@@ -74,10 +64,20 @@ title: Documentation
     <dt id="config-command-ignore-list">command-ignore-list</dt>
     <dd>A list of commands to not treat as commands. They will not show up in the <code>!commands</code>. Could be useful for disabling built-in commands from the <a href="/plugins/help"><code>help</code></a> plugin, or selectively disabling commands from a plugin you only want a few commands from.</dd>
 
+    <dt id="config-daemon">daemon</dt>
+    <dd>The IRCd used by the network you are connecting to. Some networks have IRCd specific features, such as UnrealIRCd having user mode +B for signifying a user is a bot or Twitch not accepting half of IRC. The value should be one of the ones in this array: <code>["unreal", "inspired", "twitch"]</code></dd>
+
     <dt id="config-disable-help">disable-help</dt>
     <dd>
         <p>[<b>Deprecated</b>] Use <code>"command-ignore-list": ["commands", "help"]</code> instead.</p>
         <p>Disables the <a href="/plugins/help">help</a> plugin. False by default.</p>
+    </dd>
+
+    <dt id="config-secure">tls</dt>
+    <dd>
+        <p>Uses a TLS socket instead of a non-TLS socket. Since most networks don't have valid SSL certifications, this setting does not require them to be. False by default.</p>
+
+        <p class="note">When this setting is true, <code>ipv6</code> and <code>localAddress</code> are ignored. It doesn't look possible to set them on TLS sockets in Node 0.10.x.</p>
     </dd>
 </dl>
 

@@ -3,6 +3,19 @@ layout: document
 title: Changelog
 ---
 
+<h2>v4.2</h2>
+
+<ul>
+    <li>Added: <a href="/plugins/ctcp">CTCP Plugin</a></li>
+    <li>Added: CTCP VERSION handled.</li>
+    <li>Added: <code>PluginSubscriber.addEmitter</code> now takes optional third argument: <code>acceptsMetadat</code>; when <code>true</code>, emitter's <code>on</code> method called with third argument containing <code>{plugin: "plugin-name"}</code>.</li>
+    <li>Changed: Logging in PluginCommands now says when commands are registered and which plugin they come from.</li>
+    <li>Changed: Logging in PluginCommands now says which plugin+command handled the command.</li>
+    <li>Deprecated: <code>Client.ctcp</code>, <code>PluginAction.ctcp</code>, <code>Response</code>'s <code>intent</code> of <code>"ctcp"</code>. Use next item instead.</li>
+    <li>Added: <code>ctcpRequest</code> and <code>ctcpRespond</code> on Client, PluginAction, and a Response intent.</li>
+    <li>Fixed: Do not send IRC3 Capabilities when <code>daemon</code> config property is <code>"twitch"</code>.</li>
+</ul>
+
 <h2>v4.1.1</h2>
 
 <ul>

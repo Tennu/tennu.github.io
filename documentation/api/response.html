@@ -42,15 +42,15 @@ in the order sent.</p>
         <tr>
             <td>message</td>
             <td>
-                <small>string | [string] | [CtcpType, CtcpBody]</small>
+                <small>string | [string] | [CtcpTag, CtcpBody]</small>
                 <br><br>
-                <p>The message or list of messages to send to the target. When the intent is "ctcp", the third type must be used.</p>
+                <p>The message or list of messages to send to the target. When the intent is <code>"ctcp"</code> or <code>"ctcpRequest"</code> or <code>"ctcpResponse"</code>, the third type must be used.</p>
             </td>
         </tr>
         <tr>
             <td>intent</td>
             <td>
-                <small>"say" | "act" <!-- | "ctcp" | "notice" | "none" --> | undefined</small>
+                <small>"say" | "act" | "ctcp" | "ctcpRequest" | "ctcpResponse" | "notice" | "none" | undefined</small>
                 <br><br>
                 <dl class="code-keys">
                     <dt>"say"</dt>
@@ -59,6 +59,9 @@ in the order sent.</p>
                     <dd>A <code>privmsg</code> wrapped around with the CTCP Action characters. Equivalent to <code>/me</code> in user clients.</dd>
                     <dt>"ctcp"</dt>
                     <dd>A <code>privmsg</code> wrapped around with CTCP characters. The message property must be <code>[CtcpType, CtcpBody]</code>.</dd>
+                    <dt>"ctcpRequest"</dt>
+                    <dd>A <code>privmsg</code> wrapped around CTCP requesting information from another user or everybody in a channel. The message property must either be <code>[CtcpTag]</code> or <code>[CtcpTag, CtcpBody]</code>.</dd>
+                    <dd>A response to a CTCP request. The message property must be <code>[CtcpTag, CtcpBody]</code>.</dd>
                     <dt>"notice"</dt>
                     <dd>A <code>notice</code> to the target.</dd>
                     <dt>"none"</dt>
