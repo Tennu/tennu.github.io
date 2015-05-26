@@ -1,0 +1,42 @@
+---
+layout: plugin
+title: Github plugin
+---
+
+<p>This plugin provides the <code>!gh</code> command for looking up issues and linking to repositories.</p>
+
+<h2>Configuration</h2>
+
+<p class="note">Both configuration values are required.</p>
+
+<dl>
+    <dt>github-user</dt>
+    <dd>The default username.</dd>
+    <dt>github-repo</dt>
+    <dd>The default repo.</dd>
+</dl>
+
+<p>These defaults are used when they are not provided by the user in the <code>!gh</code> command.</p>
+
+<h2>Commands</h2>
+
+<h3><code>!gh</code></h3>
+
+<p>Link to the default repo for the default user.</p>
+
+<h3><code>!gh issue-number</code></h3>
+
+<p>Link to the specified issue in the default repo for the default user.</p>
+
+<h3><code>!gh user/repo issue-number</code></h3>
+
+<p>Link to the specified issue for the specified user's repo.</p>
+
+<p>If only the repo is specified (when there's no <code>/</code>), it'll use the default user.</p>
+
+<p>If the user or repo is blank (e.g. <code>user/</code> or <code>/repo</code>), it'll use the default
+user or repo.</p>
+
+<h3><code>!gh user repo issue-number</code></h3>
+
+<p>Link to the specified issue for the specified user's repo.</p>
