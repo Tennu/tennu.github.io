@@ -1,0 +1,106 @@
+---
+layout: plugin
+title: Help Plugin
+---
+
+<p class="built-in">This plugin is built-in.</p>
+
+<p>This plugin provides two commands: <code>!commands</code> and <code>!help</code>. It also providess the <code>help</code> and <cod>commands</cod> hooks to let plugin authors to let users read bot documentation from the bot.</p>
+
+<h2>Config</h2>
+
+<h3>disable-help: boolean</h3>
+
+[<b>Deprecated</b>] Use <code>"command-ignore-list": ["commands", "help"]</code> instead.
+
+<p>Disables the plugin.</p>
+
+<h2>Commands</h2>
+
+<h3>!help &lt;topic&gt;</h3>
+
+<p>Gives the help information about that topic.</p>
+
+<p>Can also search subtopics.</p>
+
+<p>Should no topic be given, the help topic for the help command will be given.</p>
+
+<p>In the case that there is no topic for the topic, the bot will respond with:</p>
+
+<pre>&gt; Help message for selected topic does not exist.</pre>
+
+<p>All responses will be in query.</p>
+
+<h3>!commands</h3>
+
+<p>Lists the names of known commands.</p>
+
+<pre class="example">&lt;user&gt; tennubot: commands
+&lt;tennubot&gt; List of known commands:
+&lt;tennubot&gt; help, commands</pre>
+
+<h2>Exports</h2>
+
+<h3>help(query: [string]) -> string | [String] | HELP_NOT_FOUND </h3>
+
+<p>Return the help message for the specified query. It's a functional version of the <code>!help</code> command.</p>
+
+<h3>helpObject() -> Object</h3>
+
+<p>Returns the entire help registry. This is an object that joins all the keys from the objects passed to the <code>help</code> hook.</p>
+
+<h3>HELP_NOT_FOUND</h3>
+
+<p>Sentinel value returned by <code>help</code> export function when the query doesn't exist in the registry.</p>
+
+<h2>Hooks</h2>
+
+<h3>help</h3>
+
+<p>The general form of the value is a dictionary of topics that take a
+dictionary of subtopics along with an '\*' property for the help message
+for that topic itself.</p>
+
+<p>The help message may either be a string or an array of strings for
+multiline messages.</p>
+
+<p>For example, here is the help object for a time plugin:</p>
+
+{% highlight js %}
+{
+    time: {
+        '*': [
+            "The time plugin gives time information as requested.",
+            "",
+            "Subcommands: ",
+            "!time at &lt;place&gt;",
+            "!time zone &lt;place&gt;",
+            "!time between &lt;place&gt; and &lt;place&gt;"
+        ],
+        
+        // Help messages omitted for brevity.
+        at: "...",
+        zone: "...",
+        between: "..."
+    }
+}
+{% endhighlight %}
+
+<h4>Simple Represenations</h4>
+
+<p>Should your topic not have any subtopics, you may use a string or array
+directly.</p>
+
+<p>Thus, the 'zone' property in the preceding example is equivalent to:
+{% highlight js%}{ '*': "..." }{% endhighlight %}</p>
+
+<p>Should your plugin only need to respond to the query that is the plugin's
+name, the help value may be just a string or array.</p>
+
+<h4>Tip</h4>
+
+<p>The help object can be placed into a JSON file and required in if it gets too long.</p>
+
+<h3>commands</h3>
+
+<p>A list of command names that you want added to the output of <code>!commands</code>.</p>
