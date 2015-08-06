@@ -1,0 +1,96 @@
+---
+layout: document
+title: Client Methods
+---
+
+<p>The client methods are a conglomerate of methods from various plugins, the socket, and the plugin system. There are also a few client specific methods.</p>
+
+<h2>Client Specific Methods</h2>
+
+<h3>config(param: String) -> Json</h3>
+
+<p>This method lets you get a configurable value from the config object passed to the constructor. It can be any subset of JSON (string / number / object / array).</p>
+
+<h3>connect() -> this, start() -> this</h3>
+
+<p>Starts the Client.</p>
+
+<h3>disconnect() -> this, end() ->this</h3>
+
+<p>Stops the Client.</p>
+
+<h2>Action Plugin Delegates</h2>
+
+<p>These methods delegate to the action plugin. They are here so that you don't have to rely on the action plugin in almost every plugin.</p>
+
+<!-- TODO(Havvy): Make these link to the Action plugin docs. -->
+<ul>
+    <li>act</li>
+    <li>ctcp [<i>deprecated</i>]</li>
+    <li>ctcpRequest</li>
+    <li>ctcpResponse</li>
+    <li>join</li>
+    <li>kick</li>
+    <li>mode</li>
+    <li>nick</li>
+    <li>notice</li>
+    <li>part</li>
+    <li>quit</li>
+    <li>say</li>
+    <li>userhost</li>
+    <li>who</li>
+    <li>whois</li>
+    <li>raw</li>
+    <li>rawf</li>
+</ul>
+
+<h2>Self Plugin Delegates</h2>
+
+<p>The <a href="/plugins/self">Self</a> plugin provides a single method, <a href="/plugins/self#nickname">nickname</a>, that provides the Client's current nickname.</p>
+
+<h2>Subscirber Plugin Delegates</h2>
+
+<p>TODO</p>
+
+<h2>Plugin System Delegates</h2>
+
+<p>TODO</p>
+
+<h2>Logger Delegates</h2>
+
+<p>TODO</p>
+
+<!--
+
+// TODO(Havvy): Document these delegates in the above sections.
+
+// implements Subscriber
+Client.prototype.on                     = delegate _subscriber on;
+Client.prototype.once                   = delegate _subscriber once;
+Client.prototype.off                    = delegate _subscriber off;
+
+// implements PluginSystem
+Client.prototype.use                    = delegate     _plugins use;
+Client.prototype.getPlugin              = delegate_ret _plugins getPlugin
+Client.prototype.getRole                = delegate_ret _plugins getRole;
+Client.prototype.initializePlugin       = delegate     _plugins initialize;
+Client.prototype.isPluginInitializable  = delegate_ret _plugins isInitializable;
+Client.prototype.addHook                = delegate     _plugins addHook;
+
+// implements Logger
+Client.prototype.debug                  = delegate _logger debug;
+Client.prototype.info                   = delegate _logger info;
+Client.prototype.note                   = delegate _logger notice;
+Client.prototype.warn                   = delegate _logger warn;
+Client.prototype.error                  = delegate _logger error;
+Client.prototype.crit                   = delegate _logger crit;
+Client.prototype.alert                  = delegate _logger alert;
+Client.prototype.emerg                  = delegate _logger emerg;
+
+Client.prototype.log = function (level) {
+    const args = Array.prototype.slice.call(arguments, 1);
+    this._logger[level].apply(this._logger, args);
+    return this;
+};
+
+-->
