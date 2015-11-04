@@ -43,5 +43,8 @@ module.exports = FooPlugin;
 
 <dl>
     <dt>isCommand(Message)</dt>
-    <dd>Returns true if the Message is a command. Otherwise returns false.</dd>
+    <dd>Returns true if the Message is a command, whether it is handled or not. Otherwise returns false.</dd>
+
+    <dt>isHandledCommand(Message)</dt>
+    <dd>Added in v4.4. Returns true if the Message is a command that is handled by a command handler. Otherwise returns false.</dd>
 </dl>
