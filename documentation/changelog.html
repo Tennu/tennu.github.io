@@ -10,6 +10,7 @@ title: Changelog
     <li>Fixed various wrong method name errors in the channel plugin causing less spurious error messages.</li>
     <li>Fixed <code>kicker</code> property of <code>kick</code> messages giving the <code>reason</code> instead.</li>
     <li>Removed the <code>add</code> and <code>remove</code> functions on the <code>channel</code> plugin exports. Given the error messages mentioned prior, I don't think anybody was relying on the channel plugin at all yet.</li>
+    <li>Removed the <code>chatHistory</code> property on <code>Channel</code> objects. No code was updating it.</li>
     <li>Tests: Started writing some tests for the channel plugin.</li>
 </ul>
 

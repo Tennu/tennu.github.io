@@ -72,6 +72,26 @@ title: Plugins
     <td>Provides <code>admin</code> role. Lets other plugins make commands only accessible to admins.</td>
   </tr>
   <tr>
+    <td><a href="https://www.npmjs.com/package/tennu-admin-cooldown">admin-cooldown</a></td>
+    <td><a href="admin">admin</a></td>
+    <td>Allows user access to 'admin' commands but rate limited.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.npmjs.com/package/tennu-agoogle">agoogle</a></td>
+    <td><a href="admin">admin</a>, <i>opt</i> <a href="https://www.npmjs.com/package/tennu-admin-cooldown">admin-cooldown</a></td>
+    <td>Provides !google, with limits to prevent spamming.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.npmjs.com/package/tennu-asay">asay</a></td>
+    <td><a href="admin">admin</a>, <i>opt</i> <a href="https://www.npmjs.com/package/tennu-admin-cooldown">admin-cooldown</a></td>
+    <td>!rainbow, !rainbow2, !greentext</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.npmjs.com/package/tennu-aseen">aseen</a></td>
+    <td><a href="https://www.npmjs.com/package/tennu-dbcore">dbcore</a>, <a href="https://www.npmjs.com/package/tennu-dblogger">dblogger</a></td>
+    <td>Uses dblogger to provide persistent last seen functionality.</td>
+  </tr>
+  <tr>
     <td><a href="https://www.npmjs.com/package/tennu-bfdata">bfdata</a></td>
     <td>None</td>
     <td>[<b>Undocumented</b>] Brave Frontier data querying.</td>
@@ -80,6 +100,21 @@ title: Plugins
     <td><a href="control">control</a></td>
     <td><a href="admin">admin</a></td>
     <td>Provides commands for admins to control the bot from the server.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.npmjs.com/package/tennu-correction">correction</a></td>
+    <td><a href="admin">admin</a>, <i>opt</i> <a href="https://www.npmjs.com/package/tennu-admin-cooldown">admin-cooldown</a>, <a href="https://www.npmjs.com/package/tennu-dbcore">dbcore</a>, <a href="https://www.npmjs.com/package/tennu-dblogger">dblogger</a></td>
+    <td>[<b>Undocumented</b>] Corrects previous messages.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.npmjs.com/package/tennu-dbcore">dbcore</a></td>
+    <td>None</td>
+    <td>Knex integration plugin for database access.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.npmjs.com/package/tennu-dblogger">dblogger</a></td>
+    <td>dbcore</td>
+    <td>Database logging of important IRC messages (privmsg, join, part, kick, quit, etc.)</td>
   </tr>
   <tr>
     <td><a href="factoids">factoids</a></td>
@@ -125,5 +160,10 @@ title: Plugins
     <td><a href="rust-help">rust-help</a></td>
     <td>None</td>
     <td>Commands to help with <a href="https://rust-lang.org/">Rust</a>.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.npmjs.com/package/tennu-title">title</a></td>
+    <td><a href="https://www.npmjs.com/package/tennu-dbcore">dbcore</a>, <a href="https://www.npmjs.com/package/tennu-dblogger">dblogger</a></td>
+    <td>Using dblogger, shows title for last sent URL.</td>
   </tr>
 </table>
