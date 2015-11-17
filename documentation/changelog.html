@@ -3,6 +3,22 @@ layout: document
 title: Changelog
 ---
 
+<h2>v4.5.0</h2>
+
+<ul>
+    <li>Added <code>reason</code> property to <code>kick</code> messages.</li>
+    <li>Fixed various wrong method name errors in the channel plugin causing less spurious error messages.</li>
+    <li>Fixed <code>kicker</code> property of <code>kick</code> messages giving the <code>reason</code> instead.</li>
+    <li>Removed the <code>add</code> and <code>remove</code> functions on the <code>channel</code> plugin exports. Given the error messages mentioned prior, I don't think anybody was relying on the channel plugin at all yet.</li>
+    <li>Tests: Started writing some tests for the channel plugin.</li>
+</ul>
+
+<h2>v4.4.0</h2>
+
+<ul>
+    <li>Added: <code>command-ignore-list</code> entries can be an array of strings where the first string is the command to ignore and the rest is the plugins to ignore the command from.</li>
+</ul>
+
 <h2>v4.3.4</h2>
 
 <ul>

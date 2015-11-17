@@ -35,8 +35,17 @@ module.exports = FooPlugin;
 <dl>
     <dt><code>command-trigger: String</code></dt>
     <dd>The prefix to search for in PRIVMSGs in channels to determine whether the message is a command.</dd>
-    <dt><code>command-ignore-list: [String]</code></dt>
-    <dd>A list of commands that the handler will not be called for. Useful for when you only want specific commands from a plugin.</dd>
+    <dt><code>command-ignore-list: [String | [String]]</code></dt>
+    <dd>
+        <p>A list of commands that the handler will not be called for.</p>
+        <p>If the entry is a String, then all handler attempts will be ignored.</p>
+        <p>
+            If the entry is an array of Strings, the first entry in that array will be the command to be
+            ignored and the rest of the entries will be plugins to ignore that command from. For example,
+            to ignore the <code>say</code> from the <a href="control"><code>control</code></a> plugin, you
+            would pass <code>command-ignore-list: [["say", "control"]]</code>.
+        </p>
+    </dd>
 </dl>
 
 <h3>Exports</h3>
