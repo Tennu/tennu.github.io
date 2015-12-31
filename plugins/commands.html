@@ -48,6 +48,40 @@ module.exports = FooPlugin;
     </dd>
 </dl>
 
+<h3>Hooks</h3>
+
+<h4>commandMiddleware</h4>
+
+<p><i>This hook was added in Tennu v4.6.0.</i></p>
+
+<p>The <code>commandMiddleware</code> hook takes a function that gives you a <code>Command</code> that you can choose to modify or not. You must either return that <code>Command</code> or <code>undefined</code> or a Promise of one of those values. If you return <code>undefined</code>, it will cancel the rest of the handling of that command.</p>
+
+<p>You can only have one middleware per plugin, and middlewares are added in the order plugins are loaded.</p>
+
+<p>Middleware is useful for preventing commands from being executed for whatever reason. For instance, a middleware that makes certain commands admin-only could decide to return the Command if the user is an admin, and return undefined if the user is not.</p>
+
+<code>
+// Inside an 'admin' style plugin's init function.
+
+return {
+    commandMiddleware: function (command) {
+        if (adminOnlyCommands.indexOf(command.command)) {
+            return isCalledByAdmin(command).then(function (isCalledByAdmin) {
+                return isCalledByAdmin ? command : undefined;
+            });
+        } else {
+            return command;
+        }
+    },
+
+    ...
+};
+</code>
+
+<p>Middleware can also re-order arguments and rename the command.</p>
+
+<p>You <b>MUST NOT</b> change the underlying properties from <code>Message</code> since that will change how other <code>privmsg</code> handlers see the message.</p>
+
 <h3>Exports</h3>
 
 <dl>
