@@ -65,7 +65,7 @@ module.exports = FooPlugin;
 
 return {
     commandMiddleware: function (command) {
-        if (adminOnlyCommands.indexOf(command.command)) {
+        if (adminOnlyCommands.indexOf(command.command) !== -1) {
             return isCalledByAdmin(command).then(function (isCalledByAdmin) {
                 return isCalledByAdmin ? command : undefined;
             });
