@@ -67,7 +67,12 @@ return {
     commandMiddleware: function (command) {
         if (adminOnlyCommands.indexOf(command.command) !== -1) {
             return isCalledByAdmin(command).then(function (isCalledByAdmin) {
-                return isCalledByAdmin ? command : undefined;
+                if (isCalledByAdmin) {
+                    return command;
+                } else {
+                    client.say(command.channel, "Permission denied.");
+                    return;
+                }
             });
         } else {
             return command;
@@ -75,6 +80,25 @@ return {
     },
 
     ...
+};
+{% endhighlight %}
+
+<p>Here's an example you can use right now (copy and paste) that will log every command that goes through.</p>
+
+{% highlight javascript %}
+var CommandInspectionPlugin = {
+    init: function (client) {
+        return {
+            commandMiddleware: function (command) {
+                client.debug("What the command looks like right now.");
+                client.debug(require("util").inspect(command));
+
+                // Return the command unmodified since we're ust looking
+                // at it, not 
+                return command;
+            }
+        };
+    }
 };
 {% endhighlight %}
 
@@ -89,5 +113,5 @@ return {
     <dd>Returns true if the Message is a command, whether it is handled or not. Otherwise returns false.</dd>
 
     <dt>isHandledCommand(Message)</dt>
-    <dd>Added in v4.4. Returns true if the Message is a command that is handled by a command handler. Otherwise returns false.</dd>
+    <dd><p><i>This export was added in v4.4.</i></p><p>Returns true if the Message is a command that is handled by a command handler. Otherwise returns false.</p></dd>
 </dl>
