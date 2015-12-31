@@ -60,7 +60,7 @@ module.exports = FooPlugin;
 
 <p>Middleware is useful for preventing commands from being executed for whatever reason. For instance, a middleware that makes certain commands admin-only could decide to return the Command if the user is an admin, and return undefined if the user is not.</p>
 
-<code>
+{% highlight javascript %}
 // Inside an 'admin' style plugin's init function.
 
 return {
@@ -76,7 +76,7 @@ return {
 
     ...
 };
-</code>
+{% endhighlight %}
 
 <p>Middleware can also re-order arguments and rename the command.</p>
 
