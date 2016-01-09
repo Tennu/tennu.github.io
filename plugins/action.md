@@ -77,6 +77,10 @@ None
         <p>Note: The reason is ignored on many servers if the bot quits within the first minute.</p>
     </dd>
 
+    <dt>respond(<a href="http://tennu.github.io/documentation/api/response">response</a>, <a href="http://tennu.github.io/documentation/api/command-properties">command</a>)</dt>
+    <dd>Send a response to the target</dd>
+    <dd>command is required because sometimes a response will need more information to be usable (IE: the nickname or channel)</dd>
+
     <dt>say(target: Target, message: String | [String])</dt>
     <dd>Send a message to the target.</dd>
 
