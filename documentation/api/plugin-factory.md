@@ -3,13 +3,13 @@ title: Plugin Factory
 layout: document
 ---
 
-The plugin factory structure is what `tennu-plugins`, the plugin system for `tennu`, takes to install a plugin into a bot.
+<p>The plugin factory structure is what <a href="https://npmjs.com/package/tennu-plugins"><code>tennu-plugins</code></a>, the plugin system for <code>tennu</code>, uses to install a plugin into a bot.</p>
 
-Do not be scared that this is called a factory. It's just an object that holds the real [plugin](plugin) constructor and static metadata.
+<p>Do not be scared that this is called a factory. It's just an object that holds the real [plugin](plugin) constructor and static metadata.</p>
 
-## Properties
+<h2>Properties</h2>
 
-The only required property to the Plugin factory object is the `init` method.
+<p>The only required property to the Plugin factory object is the <code>init</code> method, though you should also include the <code>name</code>.</p>
 
 | Property | Description |
 | -------- | ----------- |
@@ -19,19 +19,33 @@ The only required property to the Plugin factory object is the `init` method.
 | `requires` | <small>\[String] \| undefined</small> <br><br> The list of plugins that this plugin relies on by name. |
 | `requiresRoles` | <small>\[String] \| undefined</small> <br><br> The list of roles that this plugin relies on by name. |
 
-## Template
+<h3>Static Hooks</h3>
 
-For your convenience, here is a template for making plugins:
+<p>Just like a <a href="plugin"><code>Plugin</code></a> has hooks (such as e.g. <code>handlers</code>), a <code>PluginFactory</code> also has hooks. Hooks in the <code>PluginFactory</code> are called <i>Static Hooks</i> while hooks in the <code>Plugin</code> are called <i>Instance Hooks</i>.
+
+<p>Right now, Tennu provides one static hook, <a href="/plugins/config#configDefaults"><code>configDefaults</code></a>, though other plugins can add more.</p>
+
+<h2>Template</h2>
+
+<p>For your convenience, here is a template for making plugins.</p>
+
+<p>Things in <code>ALL CAPS</code> should be replaced, not kept in <code>ALL CAPS</code></p>
 
 {% highlight javascript %}
-var OTHER_MODULES = require("...");
+const OTHER_MODULES = require("...");
 
 // Constant definitions goes here.
 
-module.exports = {
+const PLUGIN_NAME_FACTORY = {
+    name: "PLUGIN_NAME",
+
+    configDefaults: {
+        "PLUGIN-FOO": undefined
+    },
+
     init: function (client, imports) {
         // Pull imports into their own variables.
-        var import = imports["import"];
+        const import = imports["import"];
 
         // Any per-instance initialization goes here.
 

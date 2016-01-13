@@ -1,0 +1,122 @@
+---
+layout: plugin
+title: Config Plugin
+---
+
+<p class="built-in">This plugin is built-in.</p>
+
+<p><i>This plugin was added in Tennu v4.8.0</i></p>
+
+<p>This plugin deals with everything configuration based.</p>
+
+<p>When you instantiate a Tennu Client, you pass a <i>configuration</i> object
+as the first parameter. It contains various required properties for the IRC
+Socket (e.g. <code>"server"</code>, <code>"port"</code>) and values used to
+configure plugins.
+
+<h3>Static Hook: defaultConfig</h3>
+
+Most of the time there is a sensible default for a plugin's config values. For
+example, the default of <code>"!"</code> for the <code>command-trigger</code>.
+This static hook lets a plugin specify what the default value is.
+
+This static hook takes an object where the keys are configuration values and
+the values are the defaults to use.
+
+For example, here is a <i>Hello World</i> plugin that exports a
+<code>!hello</code> command to say <code>"Hello World!"</code>, but also takes
+a configuration value <code>"hello-noun"</code> to change <code>"World"</code>
+to some other thing.</p>
+
+{% highlight JavaScript %}
+"use strict";
+
+const HelloWorldPlugin = {
+    name: "Hello World",
+
+    configDefaults: {
+        "hello-thing": "World"
+    },
+
+    init (client, _deps) {
+        return {
+            handlers: {
+                "!hello": function (_command) {
+                    return `Hello ${client.config("hello-thing")}!`;
+                }
+            }
+        };
+    }
+};
+
+module.exports = HelloWorldPlugin;
+{% endhighlight %}
+
+<p>And now if we instantiate a Tennu Client without passing in a
+<code>"hello-thing"</code> configuration value, the plugin will default to
+using <code>"World"</code>.</p>
+
+<aside>Note: Before this plugin existed, it was considered good form to set
+a default value in the <code>init</code> function via 
+<code>var myValue = client.config("my-value") || defaultValue;</code>. There
+is no reason to do this anymore.</aside>
+
+<h3><code>config</code> export function</h3>
+
+<p>This plugin exports a <code>config(configValue)</code> function for grabbing
+values off of the configuration object. This function is available as a method
+on the client object. It gives you the value on the config object.</p>
+
+<p>This function can only give you values from the top level of the
+configuration object.</p>
+
+<h3>Tennu's Configuration Philosophy</h3>
+
+<p>This is the philosophy of configuration you <i>should</i> follow when writing
+plugins.</p>
+
+<ol>
+    <li>
+        <p>
+        Do not make things configurable unless you or another user needs
+        to actually configure it. Premature configuration leads to complicated
+        code.
+        </p>
+
+        <p>
+        You can see this in the changelog where configuration values are added
+        every once in awhile. Some of those configuration values were known
+        as potentially useful earlier than when they were added, but without
+        having somebody want them, they were left unimplemented.
+        </p>
+    </li>
+    <li>
+        If a configuration value has a sensible default, default to it. There's
+        no point requiring configuration when convention will do.
+    </li>
+    <li>
+        <p>
+        Do not have configuration values take objects of unrelated values. The
+        <code>configDefaults</code> can only replace wholesale a value and the
+        <code>config</code> function can only take values from the top level of
+        the configuration object.
+        </p>
+
+        <p>
+        For example, say we wanted to modify the ending punctuation in the
+        <code>!hello</code> command in the example earlier. Instead of having a
+        configuration value of <code>"hello"</code> that takes an object with
+        properties <code>"thing"</code> and <code>"punctuation"</code> we would
+        instead take configuration values <code>"hello-thing"</code> and
+        <code>"hello-punctuation"</code> instead.
+        </p>
+    </li>
+    <li>
+        Use names that will not clash with other plugins. The configuration
+        object is a shared namespace between all plugins (and the socket
+        constructor), and if you use general names, you can cause two plugins
+        to use the same configuration value for different reasons. This is why
+        the configuration value is called <code>"hello-thing"</code> instead of
+        <code>"thing"</code> in the earlier example.
+    </li>
+</ol>

@@ -5,13 +5,11 @@ title: Action Plugin
 
 <p class="built-in">This plugin is built-in.</p>
 
-This plugin provides ways to communicate with the server. All of its exports properties are available on the [Client](/documentation/api/client).
+<p>This plugin provides functions to communicate with the server.</p>
 
-## Commands
+<p>All of its export properties are also available as methods on the <a href="/documentation/api/Client">Client</a>.</p>
 
-None
-
-## Exports
+<h2>Exports</h2>
 
 <dl>
     <dt>raw(message...: String)</dt>
@@ -77,9 +75,13 @@ None
         <p>Note: The reason is ignored on many servers if the bot quits within the first minute.</p>
     </dd>
 
-    <dt>respond(<a href="http://tennu.github.io/documentation/api/response">response</a>, <a href="http://tennu.github.io/documentation/api/command-properties">command</a>)</dt>
-    <dd>Send a response to the target</dd>
-    <dd>command is required because sometimes a response will need more information to be usable (IE: the nickname or channel)</dd>
+    <dt>respond(response, privmsg)</dt>
+    <dd>
+        <p><i>Added in Tennu 4.8.0.</i></p>
+        <p>Send a <a href="/documentation/api/response">response</a>.</p>
+        <p>The <a href="/documentation/api/message-properties"><code>privmsg</code></a> is required because a response uses the details on the privmsg for the target if not given.</p>
+        <p>Note: Every <a href="/documentation/api/command-properties"><code>command</code></a> is also a <code>privmsg</code>.</p>
+    </dd>
 
     <dt>say(target: Target, message: String | [String])</dt>
     <dd>Send a message to the target.</dd>
@@ -96,7 +98,3 @@ None
     <dt>whois(user: NickName)</dt>
     <dd>Get the <code>WHOIS</code> data of the user.</dd>
 </dl>
-
-## Module Hooks
-
-None
