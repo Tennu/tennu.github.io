@@ -95,6 +95,13 @@ title: Action Plugin
     <dt>who(channel: ChannelName)</dt>
     <dd>Get the <code>WHO</code> data of the channel.</dd>
 
-    <dt>whois(user: NickName)</dt>
-    <dd>Get the <code>WHOIS</code> data of the user.</dd>
+    <dt>whois(user: NickName, undefined, opts: {memoizeOver: Object})</dt>
+    <dd>
+        <p>Get the <code>WHOIS</code> data of the user. Returns a <code>Promise&lt;Result&lt;WhoisResult, WhoisError&gt;&gt;</code>.</p>
+
+        <p>You can optionally pass an object with a <code>memoizeOver</code> as the third parameter to memoize over this value. If you are doing a <code>whois</code> in reaction to a private message (including commands), you should memoize over the private message. Otherwise, your bot may whois the same nickname multiple times in quick succession. For a command, you can get the private message with <code>Object.getPrototypeOf(command)</code>.</p>
+    </dd>
+
+    <dt>whois(users: NickNamesSeparatedByCommas)</dt>
+    <dd>Whois multiple nicknames at the same time. This doesn't return a promise, or allow memoization. If you need either, file an issue or send a PR.</dd>
 </dl>
