@@ -7,24 +7,27 @@ This plugin adds a way of storing standard responses for common queries.
 
 It has no required dependencies, but optionally depends on the <a href="admin">admin</a> role/plugin. Just make sure that you load the admin role/plugin before you load this plugin. If you just pass the plugin names to the configuration, make sure this plugin is after the admin role/plugin.
 
-The database is a <a href="https://npmjs.org/package/dirty">Dirty</a> db, choosen because it requires no binary parts or starting a remote server.
+The database is a <a href="https://npmjs.org/package/dirty">Dirty</a> db, choosen because it requires no binary parts or starting a remote server. If you want to use something else, the plugin could be changed to accomodate. File an issue.
 
 The bot will listen to private messages, and when it sees a private message that matches a factoid key, the bot will respond with the description that matches the key. You can add a trigger that must prefix the key with configuration.
 
-## Configuration
+<h2>Configuration</h2>
 
 <dl>
     <dt>factoids-database</dt>
-    <dd><b>Required String</b>. A relative path from the current working directory to the location of the factoids database.</dd>
+    <dd><b>Required String</b>. A relative path from the current working directory to the location of the factoids database. Will use an in-memory database if an empty string is given.</dd>
 
     <dt>factoids-trigger</dt>
     <dd>Optional String. Only messages that start with the trigger will look up factoids.</dd>
 
     <dt>factoids-max-alias-depth</dt>
     <dd>Optional Number. Maximum (integral) aliases to dive into before giving up. Defaults to 3.</dd>
+
+    <dt>factoids-safe-replace</dt>
+    <dd>Added in <code>v5.1.0</code>. When enabled, users cannot use <code>=</code>, <code>:=</code>, <code>!=</code>, or <code>@=</code> to replace a factoid that already exists. Instead they must either use <code>f=</code> (to replace <code>=</code>) or <code>!forget</code> and then teach the new factoid. Used to make sure users don't accidentally rewrite factoids. By default, disabled.</dd>
 </dl>
 
-## Commands
+<h2>Commands</h2>
 
 <dl>
     <dt>!factoid &lt;factoid-name&gt;</dt>
@@ -70,7 +73,7 @@ The bot will listen to private messages, and when it sees a private message that
                 <p>Aliases the key on the left to the key on the right.</p>
 
                 <p>Note: The alias is not smart, and if the key it aliases doesn't exist, it'll being aliasing nothing.</p>
-                <p>Note: Modifying this factoid with `+=` or `~=` modifies what key this is aliasing, the the response itself.</p>
+                <p>Note: Modifying this factoid with <code>+=</code> or <code>~=</code> modifies what key this is aliasing, the the response itself.</p>
             </dd>
 
             <dt>+=</dt>
@@ -90,9 +93,14 @@ The bot will listen to private messages, and when it sees a private message that
 
             <dt>~= s/search/replace/flags</dt>
             <dd>
-                <p>Does a sed-style search and replace on the description. The search is a JavaScript regular expression. The replace is a string. To use a "/" in either search or replace, use "\/". If you don't know regular expressions, you should not use this variant except for literal to literal translations using only alphanumeric, spaces, and periods.</p>
+                <p>Does a sed-style search and replace on the description. The search is a JavaScript regular expression. The replace is a string. To use a <code>"/"</code> in either search or replace, use <code>"\/"</code>. If you don't know regular expressions, you should not use this variant except for literal to literal translations using only alphanumeric, spaces, and periods.</p>
 
-                <p>The flags are either "", "g", "i", or "gi".</p>
+                <p>The flags are either <code>""</code>, <code>"g"</code>, <code>"i"</code>, or <code>"gi"</code>.</p>
+            </dd>
+
+            <dt>f= or F=</dt>
+            <dd>
+                <p>Force sets a factoid. As <code>=</code> but allows rewriting if safe-replace is enabled.</p>
             </dd>
         </dl>
 
@@ -113,14 +121,6 @@ The bot will listen to private messages, and when it sees a private message that
     <dd>Removes a lock from a factoid. You must be an admin to use this command.</dd>
 </dl>
 
-## Exports
-
-None
-
-## Hooks
-
-None
-
-## Source
+<h2>Source</h2>
 
 <a href="https://github.com/tennu/tennu-factoids">GitHub</a>
