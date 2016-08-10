@@ -16,7 +16,7 @@ title: Subscriber Plugin
 <table>
     <tr>
         <th>Prefix</th>
-        <th>Providing Plugin</th>
+        <th>Provider</th>
         <th>Functionality Given</th>
     </tr>
     <tr>
@@ -45,12 +45,11 @@ title: Subscriber Plugin
 
 <dl>
     <dt><code>on</code>, <code>off</code>, <code>once</code></dt>
-    <!-- TODO(Havvy): Finish this sentence. -->
-    <dd>These three functions take an object where the strings are the events to...</dd>
+    <dd>These three functions take an object where the properties keys are the event names including their prefixes and the property values are the handlers. They follow the same rules as the methods on Node.js's <a href="https://nodejs.org/api/events.html">event emitters</a>.</dd>
 
-    <dt><code>defaultPrefix: Sentinel object</code></dt>
+    <dt><code>defaultPrefix: Symbol</code></dt>
     <dd>
-        <p>The sentinel value passed to the subscribe hook's prefix property to specify that you are adding a default subscriber.</p>
+        <p>The symbol passed to the subscribe hook's prefix property to specify that you are adding a default subscriber.</p>
         <p>You shouldn't need to use this, since Tennu already uses the default subscriber for messages.</p>
     </dd>
 </dl>
@@ -61,10 +60,29 @@ title: Subscriber Plugin
 
 <p>This hook lets you add a new event emitter for the subscriber to dispatch to.</p>
 
-<p class="note">Note: A plugin may only add one subscription. If you need to add more, file an <a href="https://github.com/Tennu/tennu/issues">issue.</a>.</p>
+<p class="note">Note: A plugin may only add one subscription. If you need to add more, file an <a href="https://github.com/Tennu/tennu/issues">issue.</a> or send a PR to add the functionality.</p>
 
-<p>It is recommended that non-built-in plugins set the prefix as some word related to the plugin followed by a colon. For example, when the <code>ctcp</code> plugin is written, it'll subscribe the prefix <code>"ctcp:"</code>.</p>
+<p>We recommended that plugins set the prefix as some word related to the plugin followed by a colon. For example, the <code>ctcp</code> plugin subscribes the prefix <code>"ctcp:"</code>.</p>
 
-<h3><cod>handlers: Object&lt;EventNames, Handler&gt;</code></h3>
+<h3><code>handlers: Object&lt;EventNames, Handler&gt;</code></h3>
 
-<!-- TODO(Havvy): Figure out what to put here. -->
+<p>Registers each property as an event where the key is the event name and the value is the handler.</p>
+
+{% highlight JavaScript %}
+const HelloPlugin = {
+    name: "hello",
+    init: function (_client, _imports) {
+        return {
+            handlers: {
+                "!hello": function (command) {
+                    return `Hello ${command.args[0]}!`;
+                },
+
+                "ctcp:hello": function (ctcp) {
+                    return "Hello!";
+                }
+            }
+        };
+    }
+};
+{% endhighlight %}
