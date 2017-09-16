@@ -3,9 +3,9 @@ layout: plugin
 title: Control Plugin
 ---
 
-This plugin let's you control your bots.
+This plugin lets you control your bots.
 
-This bot requires the <a href="roles/admin">admin</a> role.
+This bot requires the <a href="roles/admin">admin</a> plugin.
 
 ## Config
 
@@ -15,7 +15,9 @@ This bot requires the <a href="roles/admin">admin</a> role.
 
 All of these commands require the user be an admin for them to perform.
 
-All of these commands require the user be an admin for them to perform.
+<p>The <i>target</i> must be a nickname, channel, or one of <code>&lt;reply<&gt;</code> or <code>&lt;query&gt;</code>.</p>
+
+<p><code>&lt;reply<&gt;</code> makes the bot's command happen where the command was given. <code>&lt;query&gt;</code> forces the command to happen specifically to the nickname that triggered the command. While not useful on their own, these are useful when combined with the <a href="dynamic-alias">dynamic-alias</a> plugin.</p>
 
 <h3 id="!say">!say &lt;target&gt; &lt;message&gt;</h3>
 
