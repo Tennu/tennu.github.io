@@ -17,9 +17,9 @@ All of these commands require the user be an admin for them to perform.
 
 All of these commands require the user be an admin for them to perform.
 
-### !say target message
+<h3 id="!say">!say &lt;target&gt; &lt;message&gt;</h3>
 
-Has the bot say (via PRIVMSG) the message to the target.
+<p>Has the bot say (via PRIVMSG) the message to the target.</p>
 
 ### !act target action
 

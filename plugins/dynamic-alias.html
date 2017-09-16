@@ -1,0 +1,91 @@
+---
+layout: plugin
+title: Dynamic Alias Plugin
+---
+
+<p>This plugin adds a way of creating aliases for other commands.</p>
+
+<p>This plugin depends upon the <a href="admin">admin</a> plugin.</p>
+
+<p>The database is a <a href="https://npmjs.org/package/dirty">Dirty</a> db, choosen because it requires no binary parts or starting a remote server. If you want to use something else, the plugin could be changed to accomodate. File an issue.</p>
+
+<p>The bot will intercept commands, and when it sees a command that matches an added alias, will replace the command with what it aliases to.</p>
+
+<h2>Configuration</h2>
+
+<dl>
+    <dt>dynamic-alias-database</dt>
+    <dd><b>Required String</b>. A relative path from the current working directory to the location of the factoids database. Will use an in-memory database if an empty string is given.</dd>
+
+    <dt>dynamic-alias-max-depth</dt>
+    <dd>Optional Number. Maximum (integral) aliases to dive into before giving up. Defaults to 3.</dd>
+</dl>
+
+<h2>Command: !dynamic-alias</h2>
+
+<p>This plugin adds one command `!dynamic-alias` with subcommands for specific functionality. You must be an admin to use this command.</p>
+
+<dl>
+    <dt>!dynamic-alias view &lt;alias-name&gt;</dt>
+    <dd>
+        <p>Show the runtime information on the specified alias.</p>
+    </dd>
+
+    <dt>!dynamic-alias set &lt;alias-name&gt; &lt;command-name&gt; [&lt;command-args&gt;+]</dt>
+    <dd>
+        <p>Set (or reset) a new alias.</p>
+
+        <p>Command args can include <code>$n</code> in which case it will be replaced by the nth argument (starting at 0) to the alias. Likewise for <code>$n+</code> except that it replaces with all args from the nth forwards. If there is no nth command, it will sputter <code>"Incorrect number of arguments given.</code>.</p>
+    </dd>
+
+    <dt>!dynamic-alias remove &lt;alias-name&gt;</dt>
+    <dd>
+        <p>Removes the alias.</p>
+    </dd>
+</dl>
+
+<h2>Example Usage</h2>
+
+<p>For these examples, we are going to assume we have <a href="control#!say"><code>!say</code></a> from the <a href="control">control plugin</a>. The admin is named admin, there's another user named user, and the bot is named bot. They are in the channel #here.</p>
+
+<h3>Basic example</h3>
+
+<pre>[admin] !dynamic-alias set say-hi-here say #here Hi.
+  [bot] Done.
+[admin] !say-hi-here
+  [bot] Hi.</pre>
+
+<h3>Using $n</h3>
+
+<pre>[admin] !dynamic-alias set hello say #here Hello $0
+  [bot] Done.
+[admin] !hello user
+  [bot] Hello user
+[admin] !hello world
+  [bot] Hello world
+[admin] !hello
+  [bot] Incorrect number of arguments given.</pre>
+
+<h3>Using $n+</h3>
+
+<pre>[admin] !dynamic-alias set hello say #here Hello $0+
+  [bot] Done.
+[admin] !hello user
+  [bot] Hello user
+[admin] !hello everybody and their pets
+  [bot] Hello everybody and their pets
+[admin] !hello
+  [bot] Incorrect number of arguments given.</pre>
+
+<h3>Aliases have same command restrictions as if user tried normal command</h3>
+
+<pre>[admin] !dynamic-alias set hello say #here Hi.
+  [bot] Done.
+ [user] !hello
+  [bot] Permission denied.</pre>
+
+<p>Because <code>!say</code> is an admin-only command, only an admin can call <code>!hello</code>.</p>
+
+<h2>Source</h2>
+
+<a href="https://github.com/Havvy/tennu-dynamic-alias">GitHub</a>
