@@ -39,7 +39,7 @@ title: Factoids Plugin
 
     <dt>!learn &lt;factoid-name&gt; = &lt;factoid-description&gt;</dt>
     <dd>
-        <p>Learn a factoid by the name of the factoid. By default, "&lt;factoid-name&gt; is " is prefixed to the description. This will also add the time and hostmask of the editor to the database, though that's not accessible from the plugin directly.</p>
+        <p>Learn a factoid by the name of the factoid. This will also add the time and hostmask of the editor to the database.</p>
 
         <p>You can also use other operators than just <code>=</code>.</p>
 
@@ -119,6 +119,9 @@ title: Factoids Plugin
 
     <dt>!unlock &lt;factoid-name&gt;</dt>
     <dd>Removes a lock from a factoid. You must be an admin to use this command.</dd>
+
+    <dt>!factoid-metadata &lt;factoid-name&gt;</dt>
+    <dd>Returns metadata about the factoid. Specifically its kind (action, say, alias, deleted, never existed), last editor, last edit time, and for aliases - what it aliases to.</dd>
 </dl>
 
 <h2>Source</h2>
